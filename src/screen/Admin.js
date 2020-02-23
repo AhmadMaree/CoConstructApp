@@ -64,6 +64,7 @@ export default class Admin extends Component{
            <Icon.Button 
              name="arrow-right"
              backgroundColor="#455a64"
+             
              >
               EDIT
             </Icon.Button>
@@ -143,7 +144,7 @@ export default class Admin extends Component{
            </CardItem>
            </Card>
 
-           <TouchableOpacity style={formStyles.buttonlogin}>
+           <TouchableOpacity style={formStyles.buttonlogin} onPress={() => this.props.navigation.navigate('Login')}>
                  <Text style={formStyles.buttnTextlogin}>Let's Start</Text>
              </TouchableOpacity>
          

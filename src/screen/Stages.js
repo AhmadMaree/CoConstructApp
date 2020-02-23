@@ -1,7 +1,8 @@
 import React,{Component} from 'react';
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import StepIndicator from 'react-native-step-indicator';
-
+import Icon from 'react-native-vector-icons/FontAwesome';
+import {Container,Header,Body,Checkbox,Title,Card,CardItem,Left,Right,Content,Grid,Col,Text,Button, Thumbnail, Subtitle}from 'native-base';
 
 import {
   
@@ -9,7 +10,6 @@ import {
   
   View,
   AppRegistry,
-  Text,
   StatusBar,
   TouchableOpacity,
  
@@ -17,7 +17,8 @@ import {
 
 
 
- import CardStages from '../components/CardStages';
+ import CardStages from './CardStages';
+ 
     
   const secondIndicatorStyles = {
     stepIndicatorSize: 30,
@@ -158,7 +159,59 @@ import {
               />
               
             </View>
-          <CardStages/>
+            <Container style={{backgroundColor:"#fff"}}>
+    
+              
+    <Card>
+      <CardItem style={{backgroundColor:"#fff" }}>
+        <Left style>
+          <Thumbnail
+          source={require('../Images/permit.jpg')} style={{width:90,height:70,borderRadius:10,marginRight:5}}/>
+          <View style={{alignItems:'flex-start',Top:-10}}> 
+            <Title style={{color:"#7BB062"}}>
+                Building
+            </Title>
+            <Subtitle style={{color:"#000" , paddingLeft : 20}}>
+              permit
+            </Subtitle>
+          </View>
+        </Left>
+         <Right >
+         <View >
+          <TouchableOpacity  onPress={() => this.props.navigation.navigate('Requrmint')} >
+             <Icon name="arrow-right" size={25} color='#7BB062' style={{marginTop:12}} />
+          </TouchableOpacity>
+          </View>
+         </Right>
+         </CardItem>
+         </Card> 
+         <Card >
+      <CardItem style={{backgroundColor:"#fff" }}>
+        <Left style>
+          <Thumbnail
+          source={require('../Images/EngOffice.jpg')} style={{width:90,height:70,borderRadius:10,marginRight:5}}/>
+          <View style={{alignItems:'flex-start',Top:-10}}> 
+            <Title style={{color:"#7BB062"}}>
+                Engineering
+            </Title>
+            <Subtitle style={{color:"#000" , paddingLeft : 20}}>
+              Office
+            </Subtitle>
+          </View>
+        </Left>
+         <Right>
+         <View >
+          <TouchableOpacity  onPress={()=> this.props.navigation.navigate('Login')} >
+        
+           <Icon name="arrow-right" size={25} color='#7BB062' style={{marginTop:12}} />
+        
+        
+          </TouchableOpacity>
+          </View>
+         </Right>
+         </CardItem>
+         </Card>   
+         </Container>
           
           </View>
                    

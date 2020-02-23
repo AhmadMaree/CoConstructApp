@@ -6,7 +6,7 @@ import Signup from './Signup';
 import Drawer from './Drawer';
 import Stages from './Stages';
 import Admin from './Admin';
-
+import Requrmint from './Requrmint';
 
 
 import { createAppContainer} from 'react-navigation'
@@ -14,6 +14,8 @@ import { createAppContainer} from 'react-navigation'
 import { createStackNavigator } from 'react-navigation-stack';
 import Profile from './Profile';
 import { State } from 'react-native-gesture-handler';
+
+
 
 
 const AppNavigator = createStackNavigator({
@@ -37,14 +39,20 @@ const AppNavigator = createStackNavigator({
     Profile :{
         screen: Profile
     },
+    Requrmint :{
+        screen : Requrmint
+    },
     Admin :{
         screen : Admin
-    }
+    },
+   
 },
   {
     //settings
     initialRouteName: 'Splash' ,
     headerMode : 'none'
+    
 
 })
+
 export default createAppContainer(AppNavigator);

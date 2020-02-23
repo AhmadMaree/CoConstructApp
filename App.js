@@ -27,25 +27,14 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 
 import AppStackNav from './src/screen/AppStackNav';
-import Drawer from './src/screen/Drawer';
-import Admin from './src/screen/Admin';
-import Insert from './src/screen/InsertAdmin';
 
 export default class App extends Component{
   render(){
   return (
-    /*<View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-    <Text>Home Screen</Text>
-    <Button
-      title="Go to Details" 
-     onPress={() => this.props.navigation.navigate('log')}
+   
+    <AppStackNav/>
+      
      
-    />
-  </View>*/
-      <AppStackNav/>
-      //<Drawer/>
-     // <Admin/>
-     //<Insert/>
   );};
  }
 

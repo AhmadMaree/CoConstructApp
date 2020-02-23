@@ -22,6 +22,7 @@ import CustomSidebarMenu from '../components/CustomSidebarMenu';
 import Login from './login';
 
 
+
 class Drawer extends Component {
 
 
@@ -89,6 +90,8 @@ class Drawer extends Component {
    
   });
 
+
+
   const ThrActivity_StackNavigator = createStackNavigator({
     //All the screen from the Screen1 will be indexed here
     First: {
@@ -104,7 +107,9 @@ class Drawer extends Component {
     },
    
   });
-  
+ 
+ 
+
   const DrawerNavigator = createDrawerNavigator({
     //Drawer Optons and indexing
     Stages: {
@@ -130,10 +135,13 @@ class Drawer extends Component {
         },
       },
 
+     
+
 
   },
     {
         //For the Custom sidebar menu we have to provide our CustomSidebarMenu
+       
         contentComponent: CustomSidebarMenu,
         //Sidebar width
         drawerWidth: Dimensions.get('window').width - 130,
