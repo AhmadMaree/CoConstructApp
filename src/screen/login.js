@@ -25,6 +25,8 @@ import Logo from '../components/Logo';
 
 export default class Login extends Component {
 
+
+        
         constructor(props) {
             super(props);
           this.state = {
@@ -33,10 +35,11 @@ export default class Login extends Component {
                 pass:'',
                 sec : ''
             }
+            //const {navigate} = this.props.navigation
          }
 
 
-     
+       
 
          componentDidMount() {
             BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
@@ -77,7 +80,7 @@ export default class Login extends Component {
             ToastAndroid.show('Email Or Password incorrect', ToastAndroid.SHORT)
         } 
         else if(json.result === "in"){
-            this.props.navigation.navigate('Drawer')
+           this.props.navigation.navigate('Drawer',{Email: this.state.email})
           }           
                       }
                       
@@ -108,7 +111,7 @@ export default class Login extends Component {
             ToastAndroid.show('Email Or Password or scurecode incorrect', ToastAndroid.SHORT) 
         } 
         else if(json.result === "in"){
-            this.props.navigation.navigate('Admin')
+            this.props.navigation.navigate('Admin',{Email: this.state.email})
           }           
                       }
                       
@@ -121,9 +124,9 @@ export default class Login extends Component {
 };
     
    render(){
-  
+    
        return(
-
+        
         <View style={formStyles.connt}>
             <StatusBar backgroundColor='#1c313a' barStyle='light-content'>
             </StatusBar>
@@ -133,6 +136,7 @@ export default class Login extends Component {
              <TextInput style={formStyles.inputtext} underlineColorAndroid='rgba(0,0,0,0)' 
              placeholder="Email" 
              placeholderTextColor="#ffffff"
+             value={this.state.email}
              onChangeText={ TextInputValue => this.setState({ email : TextInputValue }) }/>
               <TextInput style={formStyles.inputtext} underlineColorAndroid='rgba(0,0,0,0)' 
              placeholder="Password" 
@@ -270,3 +274,4 @@ const formStyles = StyleSheet.create({
 
 
 });   
+

@@ -14,43 +14,63 @@ import { createAppContainer} from 'react-navigation'
 import { createStackNavigator } from 'react-navigation-stack';
 import Profile from './Profile';
 import { State } from 'react-native-gesture-handler';
-
+import Changepassword from './Changepassword';
 
 
 
 const AppNavigator = createStackNavigator({
     //Screens   
     Splash: {
-        screen: Splash
+        screen: Splash,
+        navigationOptions: {
+            header: null
+        },
     },
     Login: {
-        screen: Login
+        screen: Login,
+        navigationOptions: {
+            header: null
+        },
 
     },
-    singup : {
-        screen : Signup 
-    },
     Drawer : {
-        screen : Drawer 
+        screen : Drawer ,
+        navigationOptions: {
+            header: null
+        },
     },
-    Stages : {
-        screen : Stages
-    },
-    Profile :{
-        screen: Profile
-    },
-    Requrmint :{
-        screen : Requrmint
+    singup : {
+        screen : Signup ,
+        navigationOptions: {
+            header: null
+        },
     },
     Admin :{
-        screen : Admin
+        screen : Admin,
+        navigationOptions: {
+            header: null
+        },
+    },
+    Profile : {
+        screen : Profile,
+       
+    },
+    Changepassword : {
+            screen : Changepassword,
+            navigationOptions : {
+                title: 'ChangePassword',
+                headerStyle: {
+                backgroundColor: '#7BB062',
+                },
+                headerTintColor: '#fff',
+            }
     },
    
 },
   {
     //settings
     initialRouteName: 'Splash' ,
-    headerMode : 'none'
+    //headerMode : 'none'
     
 
 })

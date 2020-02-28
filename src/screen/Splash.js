@@ -12,6 +12,7 @@ import {
   } from 'react-native';
 
   export default class Splash extends Component{
+    
   
     state= {
         logoAnim : new Animated.Value(0),

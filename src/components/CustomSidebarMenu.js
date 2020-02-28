@@ -6,8 +6,16 @@ import { ScrollView } from 'react-native-gesture-handler';
 
 
  class CustomSidebarMenu extends Component {
-    constructor() {
-      super();
+  constructor(props) {
+    super(props);
+      
+    this.state = {
+     
+      email:'',
+      
+  }
+    //const {navigate} = this.props.navigation
+ 
       
       this.proileImage =
         '../Images/profil-image.png';
@@ -20,8 +28,8 @@ import { ScrollView } from 'react-native-gesture-handler';
         },
         {
           navOptionThumb: 'account-edit',
-          navOptionName: 'EditProfile',
-          screenToNavigate: 'Profile',
+          navOptionName: 'Profile',
+          screenToNavigate: 'First1',
         },
         {
           navOptionThumb: 'logout-variant',
@@ -31,13 +39,15 @@ import { ScrollView } from 'react-native-gesture-handler';
       ];
     }
     render() {
+      const { Email } = this.props.navigation.state.params;
+      this.state.email = Email;
       return (
         <ScrollView >
            <ImageBackground source={require('../Images/green.jpg')} style={{width:undefined, padding :32 ,paddingTop:48}}> 
            <Image
             source={require('../Images/profil-image.png')}
             style={styles.sideMenuProfileIcon}/> 
-            <Text style={styles.name1}>Nafe Hammad</Text>
+            <Text style={styles.name1}>{this.state.email}</Text>
           </ImageBackground>
           {/*Divider between Top Image and Sidebar Option*/}
           
@@ -63,7 +73,7 @@ import { ScrollView } from 'react-native-gesture-handler';
                   }}
                   onPress={() => {
                     
-                    this.props.navigation.navigate(item.screenToNavigate);
+                    this.props.navigation.navigate(item.screenToNavigate,{EW:this.state.email});
                   }}>
                   {item.navOptionName}
                 </Text>

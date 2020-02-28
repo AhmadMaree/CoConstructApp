@@ -1,6 +1,9 @@
 import React,{Component} from 'react';
 import { Container, Content,Card,CardItem,Left,Right, Form, Item, Input, Label } from 'native-base';
-import Icon from 'react-native-vector-icons/Entypo';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon1 from 'react-native-vector-icons/MaterialIcons';
+import { Colors } from '../Color/Colors';
+
 import {
   
   StyleSheet,
@@ -13,15 +16,42 @@ import {
   Image
 } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
+import ImagePicker from 'react-native-image-picker';
 
 
 class Profile extends Component {
 
 
+    state = {
+      avatarSource : null,
+      //emailEw=''
+
+    }
+
+    selectImage =async ()=>{
+        ImagePicker.showImagePicker({noData:true,mediaType:'photo'}, (response) => {
+          console.log('Response = ', response);
+        
+          if (response.didCancel) {
+            console.log('User cancelled image picker');
+          } else if (response.error) {
+            console.log('ImagePicker Error: ', response.error);
+          } else if (response.customButton) {
+            console.log('User tapped custom button: ', response.customButton);
+          } else {
+           
+            this.setState({
+              avatarSource: response.uri,
+            });
+          }
+        });
+    }
+
     render(){
+      const {EW} = this.props.navigation.state.params;
+      //this.props.emailEw= EW;
         return(
             <View style={Styles.connt}>
-
             <StatusBar backgroundColor='#1c313a' barStyle='light-content'>
             </StatusBar>
              <ImageBackground
@@ -29,9 +59,14 @@ class Profile extends Component {
             style={Styles.hBk}> 
             <View style={Styles.hed}>
                 <View style={Styles.ProfileWarp}> 
-                    <Image style={Styles.ProfileTopic} source={require('../Images/logo1.png')}/>
+                {this.state.avatarSource == null ? 
+
+                    <Image  style={Styles.ProfileTopic} source={require('../Images/logo1.png')}/>
+                  : <Image  style={Styles.ProfileTopic} source={{uri:this.state.avatarSource}}/>}
                 </View>
-                <Text style={Styles.email}>Nafe.hammd@hotmail.com</Text>
+                <Icon onPress={this.selectImage} size={30} name="camera" style={{color:'#1c313a',marginTop:-60,marginLeft:110 }}/>
+                <Text style={Styles.email}>{EW}</Text>
+                <Text>{this.props.avatarSource}</Text>
             </View>
             
             </ImageBackground>
@@ -47,16 +82,14 @@ class Profile extends Component {
                         
              </Item>
              <Item stackedLabel>
-                
-                <Label>Password</Label>
-                <Input secureTextEntry={true} underlineColorAndroid />
-                        
-             </Item>
-             <Item stackedLabel>
-                
-                <Label>ConfirmPassword</Label>
-                <Input secureTextEntry={true} underlineColorAndroid />
-                        
+              
+              <TouchableOpacity style={Styles.row} onPress={() => this.props.navigation.navigate('Changepassword')}>
+                <Text style={[Styles.title]}>EditPassword</Text>
+                <View style={Styles.co}>
+                <Icon1 name={'keyboard-arrow-right'} size={30} color={Colors.DARKGRAY}/>
+                </View>
+               </TouchableOpacity>
+               
              </Item>
              <TouchableOpacity style={Styles.buttonlogin}>
                  <Text style={Styles.buttnTextlogin}>Save</Text>
@@ -114,6 +147,7 @@ const Styles = StyleSheet.create({
             fontSize : 16 , 
             color : '#fff',
             fontWeight  :'bold',
+            marginTop:30
            
       },
       Bar : {
@@ -124,21 +158,44 @@ const Styles = StyleSheet.create({
         
     },
     buttonlogin : {
-        width : 300,
+        width : "80%",
         backgroundColor : '#7BB062',
-        borderRadius : 25 , 
+        borderRadius : 60 , 
         marginVertical : 16,
         paddingVertical : 16,
-        margin : "10%" ,
+        margin : "13%" ,
 
     } ,
     buttnTextlogin : {
         fontSize :16 ,
         fontWeight : '500',
         color : '#ffffff' , 
-        textAlign : 'center'
+        textAlign : 'center',
+  
 
-    }
-      
+    },
+    title:{
+      fontSize: 14,
+      fontWeight:'bold',
+      color: Colors.DARKGRAY,
+  },
+  row:{
+    flexDirection: 'row',
+    justifyContent:'space-between',
+    height:70,
+    width : "90%",
+    borderRadius : 60 ,
+    paddingLeft:25,
+    paddingRight:25,
+    alignItems:'center',
+    backgroundColor: Colors.CGRAY,
+
+}, 
+
+co: {
+  //flex:1,
+   //paddingTop:100,
+  //backgroundColor:Colors.LIGHTGRAY,
+}
 });   
 export default Profile;

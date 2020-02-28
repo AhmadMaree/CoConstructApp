@@ -20,10 +20,12 @@ import Stages from './Stages';
 import Profile from './Profile';
 import CustomSidebarMenu from '../components/CustomSidebarMenu';
 import Login from './login';
+import Requrmint from './Requrmint';
 
 
 
 class Drawer extends Component {
+
 
 
 
@@ -45,6 +47,8 @@ class Drawer extends Component {
       this.props.navigationProps.toggleDrawer();
     };
     render() {
+     
+      
       return (
         <View style={{ flexDirection: 'row' }}>
           <TouchableOpacity onPress={this.toggleDrawer.bind(this)}>
@@ -53,7 +57,9 @@ class Drawer extends Component {
               source={require('../Images/drawer.png')}
               style={{ width: 25, height: 25, marginLeft: 5 }}
             />
+          
           </TouchableOpacity>
+      
         </View>
         
       );
@@ -76,10 +82,10 @@ class Drawer extends Component {
   });
   const SecActivity_StackNavigator = createStackNavigator({
     //All the screen from the Screen1 will be indexed here
-    First: {
+    First1: {
       screen: Profile,
       navigationOptions: ({ navigation }) => ({
-        title: 'EditProfile',
+        title: 'Profile',
         headerLeft: <Drawer navigationProps={navigation} />,
         headerStyle: {
           backgroundColor: '#7BB062',
@@ -107,7 +113,21 @@ class Drawer extends Component {
     },
    
   });
- 
+  const ForActivity_StackNavigator = createStackNavigator({
+    //All the screen from the Screen1 will be indexed here
+    First: {
+      screen: Requrmint,
+      navigationOptions: ({ navigation }) => ({
+        title: 'Requrmint',
+        headerLeft: <Drawer navigationProps={navigation} />,
+        headerStyle: {
+          backgroundColor: '#7BB062',
+        },
+        headerTintColor: '#fff',
+      }),
+    },
+   
+  });
  
 
   const DrawerNavigator = createDrawerNavigator({
@@ -123,7 +143,7 @@ class Drawer extends Component {
         //Title
         screen: SecActivity_StackNavigator,
         navigationOptions: {
-          drawerLabel: 'EditProfile',
+          drawerLabel: 'Profile',
         },
       },
 
@@ -135,19 +155,24 @@ class Drawer extends Component {
         },
       },
 
-     
+      Requrmint: {
+        //Title
+        screen: ForActivity_StackNavigator,
+        navigationOptions: {
+          drawerLabel: 'Requrmint',
+        },
+      },
 
 
   },
-    {
+  {
         //For the Custom sidebar menu we have to provide our CustomSidebarMenu
        
-        contentComponent: CustomSidebarMenu,
+        contentComponent:props => <CustomSidebarMenu {...props} />,
         //Sidebar width
         drawerWidth: Dimensions.get('window').width - 130,
         hideStatusBar  : true 
          
-      }
-  );
+      });
    
-  export default createAppContainer(DrawerNavigator);
+export default createAppContainer(DrawerNavigator);
