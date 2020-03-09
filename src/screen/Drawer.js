@@ -21,7 +21,7 @@ import Profile from './Profile';
 import CustomSidebarMenu from '../components/CustomSidebarMenu';
 import Login from './login';
 import Requrmint from './Requrmint';
-
+import Row from './Row';
 
 
 class Drawer extends Component {
@@ -128,6 +128,22 @@ class Drawer extends Component {
     },
    
   });
+
+  const FifActivity_StackNavigator = createStackNavigator({
+    //All the screen from the Screen1 will be indexed here
+    First3: {
+      screen: Row,
+      navigationOptions: ({ navigation }) => ({
+        title: 'Engineering Office',
+        headerLeft: <Drawer navigationProps={navigation} />,
+        headerStyle: {
+          backgroundColor: '#7BB062',
+        },
+        headerTintColor: '#fff',
+      }),
+    },
+   
+  });
  
 
   const DrawerNavigator = createDrawerNavigator({
@@ -160,6 +176,13 @@ class Drawer extends Component {
         screen: ForActivity_StackNavigator,
         navigationOptions: {
           drawerLabel: 'Requrmint',
+        },
+      },
+      Row: {
+        //Title
+        screen: FifActivity_StackNavigator,
+        navigationOptions: {
+          drawerLabel: 'Engineering Office ',
         },
       },
 

@@ -65,7 +65,6 @@ const AppNavigator = createStackNavigator({
                 headerTintColor: '#fff',
             }
     },
-   
 },
   {
     //settings

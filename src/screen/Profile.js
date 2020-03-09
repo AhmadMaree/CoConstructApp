@@ -21,13 +21,15 @@ import ImagePicker from 'react-native-image-picker';
 
 class Profile extends Component {
 
-
-    state = {
-      avatarSource : null,
-      //emailEw=''
-
-    }
-
+      constructor(props){
+        super(props);
+        this.state = {
+          emailEw : '',
+          data :null,
+          avatarSource : null,
+          photoname : '',
+        }
+      }
     selectImage =async ()=>{
         ImagePicker.showImagePicker({noData:true,mediaType:'photo'}, (response) => {
           console.log('Response = ', response);
@@ -42,14 +44,44 @@ class Profile extends Component {
            
             this.setState({
               avatarSource: response.uri,
+              data :response.path,
+              photoname : response.fileName
             });
+            
+            this.onRegister();
           }
         });
     }
+    
 
+   onRegister = () => {
+   let url2 = 'http://192.168.1.107:8088/Image_upload/'+this.state.emailEw;
+   // var imageName = this.state.imageName;
+    const data1 = new FormData();
+    data1.append("email",this.state.emailEw);
+    data1.append("file", this.state.avatarSource); 
+    data1.append("name",this.state.photoname);
+    data1.append("type",this.state.data);
+    
+    
+     fetch(url2, { method: 'post', body: data1 })
+     .then(response => response.json())
+     .then(json => {if(json.result === "exists"){
+         //AsyncStorage
+      ///alert("الحساب موجود ! يرجى تغيير رقم الموبايل");            
+     }
+     else if(json.result === "sucess"){
+     // alert("تم إنشاء حسابك بنجاح"); 
+    }       
+    }).catch((error) => { 
+      console.log(error);
+      //alert( error)
+    });
+    };
+  
     render(){
       const {EW} = this.props.navigation.state.params;
-      //this.props.emailEw= EW;
+      this.state.emailEw= EW;
         return(
             <View style={Styles.connt}>
             <StatusBar backgroundColor='#1c313a' barStyle='light-content'>
@@ -83,7 +115,7 @@ class Profile extends Component {
              </Item>
              <Item stackedLabel>
               
-              <TouchableOpacity style={Styles.row} onPress={() => this.props.navigation.navigate('Changepassword')}>
+              <TouchableOpacity style={Styles.row} onPress={() => this.props.navigation.navigate('Changepassword',{email1:EW})}>
                 <Text style={[Styles.title]}>EditPassword</Text>
                 <View style={Styles.co}>
                 <Icon1 name={'keyboard-arrow-right'} size={30} color={Colors.DARKGRAY}/>

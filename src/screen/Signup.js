@@ -358,7 +358,7 @@ export default class Signup extends Component {
       this.state.Name === '' || this.state.Email === '' ||
       this.state.Pass === '' || this.state.CPass === '')) {
 
-        let url2 = 'http://192.168.1.104:8088/Insertsingup/'+this.state.Name+'/'+this.state.Email+'/'+this.state.Pass;
+        let url2 = 'http://192.168.1.107:8088/Insertsingup/'+this.state.Name+'/'+this.state.Email+'/'+this.state.Pass;
           const data = new FormData();
          data.append("username",this.state.Name);
           data.append("email",this.state.Email);

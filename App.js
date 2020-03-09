@@ -27,7 +27,6 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 
 import AppStackNav from './src/screen/AppStackNav';
-
 export default class App extends Component{
   constructor(props) {
     super(props);
@@ -38,7 +37,6 @@ export default class App extends Component{
   return (
    
     <AppStackNav/>
-      
      
   );};
  }
