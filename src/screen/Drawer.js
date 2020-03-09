@@ -22,7 +22,7 @@ import CustomSidebarMenu from '../components/CustomSidebarMenu';
 import Login from './login';
 import Requrmint from './Requrmint';
 import Row from './Row';
-
+import Feedback from './Feedback'
 
 class Drawer extends Component {
 
@@ -144,6 +144,22 @@ class Drawer extends Component {
     },
    
   });
+
+  const SixActivity_StackNavigator = createStackNavigator({
+    //All the screen from the Screen1 will be indexed here
+    First2: {
+      screen: Feedback,
+      navigationOptions: ({ navigation }) => ({
+        title: 'Feedback',
+        headerLeft: <Drawer navigationProps={navigation} />,
+        headerStyle: {
+          backgroundColor: '#7BB062',
+        },
+        headerTintColor: '#fff',
+      }),
+    },
+   
+  });
  
 
   const DrawerNavigator = createDrawerNavigator({
@@ -183,6 +199,13 @@ class Drawer extends Component {
         screen: FifActivity_StackNavigator,
         navigationOptions: {
           drawerLabel: 'Engineering Office ',
+        },
+      },
+      Feedback: {
+        //Title
+        screen: SixActivity_StackNavigator,
+        navigationOptions: {
+          drawerLabel: 'Feedback ',
         },
       },
 

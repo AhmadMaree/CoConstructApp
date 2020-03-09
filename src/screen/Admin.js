@@ -89,6 +89,7 @@ export default class Admin extends Component{
            <Icon.Button
              name="arrow-right"
              backgroundColor="#455a64"
+             onPress={()=> this.props.navigation.navigate('Officeadd')}
              >
            EDIT
             </Icon.Button>

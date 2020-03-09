@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Image, Text, ImageBackground } from 'react-native';
-import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import Icon from "react-native-vector-icons/FontAwesome";
 import { ScrollView } from 'react-native-gesture-handler';
 
 
@@ -27,15 +27,21 @@ import { ScrollView } from 'react-native-gesture-handler';
           screenToNavigate: 'Stages',
         },
         {
-          navOptionThumb: 'account-edit',
+          navOptionThumb: 'user-circle-o',
           navOptionName: 'Profile',
           screenToNavigate: 'First1',
         },
         {
-          navOptionThumb: 'logout-variant',
+          navOptionThumb: 'commenting',
+          navOptionName: 'Feedback',
+          screenToNavigate: 'First2',
+        },
+        {
+          navOptionThumb: 'sign-out',
           navOptionName: 'Logout',
          screenToNavigate: 'Login',
         },
+        
       ];
     }
     render() {
