@@ -44,9 +44,12 @@ import React, {
       this.state = {
         expanded: false,
         height: ROW_HEIGHT,
-        generalStarCount: 3,
+        generalStarCount: 0,
       };
     }
+
+  /*  */
+
     onGeneralStarRatingPress(rating) {
       this.setState({
         generalStarCount: rating,
@@ -84,17 +87,19 @@ import React, {
     }
   
     renderFrontface() {
+      
       return (
         <View style={styles.container1}>
 
         <View style={styles.leftPane}>
-        <Image source={require('../Images/office1.jpg')} style={{width : "100%" , height : "100%", flex:1}} />
+        <Image source={{ uri: encodeURI("http://192.168.1.103:8088/load_image1?img=" + this.props.photo)}} style={{width : "100%" , height : "100%", flex:1}} />
+      
         </View>
     
         <View style={styles.rightPane}>
           <View style={{ flex: 1, flexDirection: 'column' }}>
-          <Text  style={{fontFamily :'Bellota-Bold'}}>Kalbouneh Engineering Office</Text>
-           <Text  style={{fontFamily :'Bellota-Light'}} >Architect: Rouhi Kalbouneh</Text>
+          <Text  style={{fontFamily :'Bellota-Bold'}}>{this.props.ON}</Text>
+          <Text  style={{fontFamily :'Bellota-Light'}} >Architect:{this.props.EN}</Text>
           </View>
           <View style={{alignContent :'center' , marginBottom : 5 , padding : 10 , width:45}}>
           <StarRating
@@ -134,7 +139,14 @@ import React, {
   
     renderBackface() {
       return (
-        <ProfileCard onPress={this.flip} />
+        <ProfileCard onPress={this.flip}
+                      PN = {this.props.PN}
+                      EM = {this.props.EM}
+                      FA ={this.props.FA}
+                      TE = {this.props.TE}
+                      AD = {this.props.AD}
+
+        />
       );
     }
   
@@ -177,7 +189,7 @@ import React, {
                     >
                       <View style={{flexDirection: 'row'}}>
                     <Icon1 name={'office-building'} size={20} color={"#605B3D"} style={{padding:7}}/>
-                    <Text  style={{fontFamily :'Bellota-Bold',fontSize:20}}>Kalbouneh Engineering Office</Text>
+                    <Text  style={{fontFamily :'Bellota-Bold',fontSize:20}}>{this.props.ON}</Text>
                     </View>
                     </View>
 

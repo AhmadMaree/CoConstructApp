@@ -1,4 +1,4 @@
-import React,{Component} from 'react';
+import React,{Component, useCallback} from 'react';
 import { Container, Content,Card,CardItem,Left,Right, Form, Item, Input, Label } from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Icon1 from 'react-native-vector-icons/MaterialIcons';
@@ -28,10 +28,32 @@ class Profile extends Component {
           data :null,
           avatarSource : null,
           photoname : '',
+          allData : {},
+          length : 0 ,
         }
       }
-    selectImage =async ()=>{
-        ImagePicker.showImagePicker({noData:true,mediaType:'photo'}, (response) => {
+
+      
+      componentDidMount() {
+        const {EW} = this.props.navigation.state.params;
+        this.state.emailEw= EW;
+        let url = "http://192.168.1.103:8088/get_all_Profile/"+this.state.emailEw ;
+        fetch(url).then(results=>results.json())
+        .then(results=>this.setState({'allData':results}));
+       
+       }
+      
+      selectPhotoTapped(num){
+        const options = {
+          quality: 1.0,
+          maxWidth: 500,
+          maxHeight: 500,
+       includeBase64: true,
+          storageOptions: {
+            skipBackup: true
+          }
+        }
+        ImagePicker.showImagePicker(options, (response) => {
           console.log('Response = ', response);
         
           if (response.didCancel) {
@@ -44,38 +66,38 @@ class Profile extends Component {
            
             this.setState({
               avatarSource: response.uri,
-              data :response.path,
+              data :response.data,
               photoname : response.fileName
             });
             
             this.onRegister();
           }
         });
-    }
     
+  } 
 
    onRegister = () => {
-   let url2 = 'http://192.168.1.107:8088/Image_upload/'+this.state.emailEw;
+   let url2 = 'http://192.168.1.105:8088/Image_upload/'+this.state.emailEw;
    // var imageName = this.state.imageName;
     const data1 = new FormData();
     data1.append("email",this.state.emailEw);
-    data1.append("file", this.state.avatarSource); 
+    data1.append("file", this.state.data); 
     data1.append("name",this.state.photoname);
-    data1.append("type",this.state.data);
+    //data1.append("type",this.state.avatarSource);
     
     
      fetch(url2, { method: 'post', body: data1 })
      .then(response => response.json())
      .then(json => {if(json.result === "exists"){
          //AsyncStorage
-      ///alert("الحساب موجود ! يرجى تغيير رقم الموبايل");            
+      ///alert          
      }
      else if(json.result === "sucess"){
-     // alert("تم إنشاء حسابك بنجاح"); 
+     // alert 
     }       
     }).catch((error) => { 
       console.log(error);
-      //alert( error)
+      
     });
     };
   
@@ -92,11 +114,11 @@ class Profile extends Component {
             <View style={Styles.hed}>
                 <View style={Styles.ProfileWarp}> 
                 {this.state.avatarSource == null ? 
-
+                      
                     <Image  style={Styles.ProfileTopic} source={require('../Images/logo1.png')}/>
                   : <Image  style={Styles.ProfileTopic} source={{uri:this.state.avatarSource}}/>}
                 </View>
-                <Icon onPress={this.selectImage} size={30} name="camera" style={{color:'#1c313a',marginTop:-60,marginLeft:110 }}/>
+                <Icon onPress={this.selectPhotoTapped.bind(this,1)} size={30} name="camera" style={{color:'#1c313a',marginTop:-60,marginLeft:110 }}/>
                 <Text style={Styles.email}>{EW}</Text>
                 <Text>{this.props.avatarSource}</Text>
             </View>

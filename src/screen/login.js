@@ -63,7 +63,7 @@ export default class Login extends Component {
         if(!this.state.checked1){
         if (!(this.state.email=== '' || this.state.pass === '')) {
 
-        let url2 = 'http://192.168.1.107:8088/loginco/'+this.state.email+'/'+this.state.pass;
+        let url2 = 'http://192.168.1.103:8088/loginco/'+this.state.email+'/'+this.state.pass;
         const data = new FormData();
        
         data.append("email",this.state.email);

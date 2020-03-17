@@ -17,6 +17,11 @@ import ProfileDetailCard from './ProfileDetailCard';
 import AdditionalInfoCard from './AdditionalInfoCard';
 
 export default class Row extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+/*  */
 
   componentWillMount() {
     this.renderBackface = this.renderBackface.bind(this);
@@ -111,7 +116,7 @@ export default class Row extends Component {
             }}
           >
 
-           <Text style={{fontFamily:'Bellota-LightItalic',marginLeft:50}}> Jawwal:0598221212</Text>
+          <Text style={{fontFamily:'Bellota-LightItalic',marginLeft:50}}> Jawwal:{this.props.PN}</Text>
            
            
             <View
@@ -142,8 +147,8 @@ alignItems:'center',
                 }}
               >
                 
-                <Text style={{fontFamily:'Bellota-LightItalic',marginLeft:0}}> Arch.rouhi@yahoo.com:0598221212</Text>
-                <Text style={{fontFamily:'Bellota-LightItalic',marginLeft:0}}> www.fb.com/officekalbounehengineering</Text>
+              <Text style={{fontFamily:'Bellota-LightItalic',marginLeft:0}}> {this.props.EM}</Text>
+              <Text style={{fontFamily:'Bellota-LightItalic',marginLeft:0}}> {this.props.FA}</Text>
               </View>
 
             </View>
@@ -156,7 +161,11 @@ alignItems:'center',
               renderFrontface={this.renderBlankFace}
               renderBackface={this.renderBackface}
             >
-              <ProfileDetailCard onPress={onPress} />
+              <ProfileDetailCard  onPress={onPress}
+                                 TE = {this.props.TE}
+                                 AD = {this.props.AD}
+              
+              />
             </FoldView>
 
           </View>

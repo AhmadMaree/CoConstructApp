@@ -1,4 +1,6 @@
-import React from 'react';
+import React, {
+  Component,
+} from 'react';
 
 import {
   View,
@@ -24,15 +26,21 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ({ onPress }) => (
+export default class Row extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return(
   <View style={styles.container}>
     <View style={{ flex: 1 }}>
     <Icon name="home" size={25} color='#7BB062' style={{marginTop:2}} />
-      <Text style={{fontFamily:'Bellota-Bold',marginTop:-22,marginLeft:30}}> Palestine-Nablus-Rafedia-Main Street</Text>
+      <Text style={{fontFamily:'Bellota-Bold',marginTop:-22,marginLeft:30}}>{this.props.AD}</Text>
       <Icon name="phone-square" size={25} color='#7BB062' style={{marginTop:4}} />
-      <Text  style={{fontFamily:'Bellota-Bold',marginTop:-26,marginLeft:30}}> Telefax:+970 9 2330340 </Text>
-    </View>
-
-    
+      <Text  style={{fontFamily:'Bellota-Bold',marginTop:-26,marginLeft:30}}> Telefax:{this.props.TE} </Text>
+    </View>    
   </View>
-);
+    );
+  }
+}

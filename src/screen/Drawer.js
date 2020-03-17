@@ -21,9 +21,8 @@ import Profile from './Profile';
 import CustomSidebarMenu from '../components/CustomSidebarMenu';
 import Login from './login';
 import Requrmint from './Requrmint';
-import Row from './Row';
 import Feedback from './Feedback'
-
+import ListRow from './ListRow';
 class Drawer extends Component {
 
 
@@ -132,7 +131,7 @@ class Drawer extends Component {
   const FifActivity_StackNavigator = createStackNavigator({
     //All the screen from the Screen1 will be indexed here
     First3: {
-      screen: Row,
+      screen: ListRow,
       navigationOptions: ({ navigation }) => ({
         title: 'Engineering Office',
         headerLeft: <Drawer navigationProps={navigation} />,
@@ -194,7 +193,7 @@ class Drawer extends Component {
           drawerLabel: 'Requrmint',
         },
       },
-      Row: {
+      ListRow: {
         //Title
         screen: FifActivity_StackNavigator,
         navigationOptions: {

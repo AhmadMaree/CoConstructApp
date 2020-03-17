@@ -201,7 +201,7 @@ import {
         </Left>
          <Right>
          <View >
-          <TouchableOpacity  onPress={() => this.props.navigation.navigate('Row')} >
+          <TouchableOpacity  onPress={() => this.props.navigation.navigate('ListRow')} >
         
            <Icon name="arrow-right" size={25} color='#7BB062' style={{marginTop:12}} />
         

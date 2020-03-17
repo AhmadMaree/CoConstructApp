@@ -27,6 +27,7 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 
 import AppStackNav from './src/screen/AppStackNav';
+import Profile from './src/screen/Profile'
 export default class App extends Component{
   constructor(props) {
     super(props);

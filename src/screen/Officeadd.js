@@ -14,7 +14,8 @@ import {
   TouchableOpacity,
   ImageBackground,
   Image,
-  TextInput
+  TextInput,
+  ToastAndroid
 } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import ImagePicker from 'react-native-image-picker';
@@ -33,9 +34,22 @@ import ImagePicker from 'react-native-image-picker';
         
   
       }
+
+
+
+      selectPhotoTapped(num){
+        const options = {
+          quality: 1.0,
+          maxWidth: 500,
+          maxHeight: 500,
+       includeBase64: true,
+          storageOptions: {
+            skipBackup: true
+          }
+        }
   
-      selectImage =async ()=>{
-          ImagePicker.showImagePicker({noData:true,mediaType:'photo'}, (response) => {
+         selectImage =async ()=>{
+          ImagePicker.showImagePicker(options, (response) => {
             console.log('Response = ', response);
           
             if (response.didCancel) {
@@ -51,26 +65,17 @@ import ImagePicker from 'react-native-image-picker';
               });
             }
           });
-      };
-
+      }
+    };
       onRegister = () => {
 
   
   
-        /*selectPhotoTapped(num){
-          const options = {
-            quality: 1.0,
-            maxWidth: 500,
-            maxHeight: 500,
-         includeBase64: true,
-            storageOptions: {
-              skipBackup: true
-            }
-          };
-      */
+        
       
+        if (!(this.state.ON=== '' || this.state.EN=== ''||this.state.PN === ''||this.state.EM === ''||this.state.FA === ''||this.state.TE === ''||this.state.AD === '')) {
       
-        let url2 = 'http://192.168.1.104:8088/Insert/'+this.state.ON+'/'+this.state.EN+'/'+this.state.PN+'/'+this.state.EM+'/'+this.state.FA+'/'+this.state.TE+'/'+this.state.AD;
+        let url2 = 'http://192.168.1.107:8088/Insertoffice/'+this.state.ON+'/'+this.state.EN+'/'+this.state.PN+'/'+this.state.EM+'/'+this.state.FA+'/'+this.state.TE+'/'+this.state.AD;
         //var imageName = this.state.imageName;
          const data = new FormData();
         //data.append("file", this.state.data); 
@@ -87,19 +92,21 @@ import ImagePicker from 'react-native-image-picker';
         
         
          fetch(url2, { method: 'POST',body:data})
-         .then(response => response.json)
+         .then(response => response.json())
          
-         .then(json => {if(json.result === "exists"){
+         .then(json => {if(json.result === "failed"){
              //AsyncStorage
-          alert("no");          
+            ToastAndroid.show('Error with database. Please try again later. ', ToastAndroid.SHORT)         
          }
          else if(json.result === "success"){
-          alert("insert ok"); 
+          ToastAndroid.show('Office Added', ToastAndroid.SHORT)
         }       
        })                                                                                   
-      
+      } else {
+        ToastAndroid.show('Must Fill the Boxs', ToastAndroid.SHORT)
+    }
         
-        };
+ };
   
 
    render(){
@@ -148,6 +155,8 @@ import ImagePicker from 'react-native-image-picker';
           placeholder="Enter Phone Number Ex:0597438914"
            onChangeText={ TextInputValue=>this.setState({PN:TextInputValue}) }
            underlineColorAndroid='transparent'
+           keyboardType= 'numeric'
+           maxLength ={10}
           style={Styles.TextInputStyleClass}
           />
            <TextInput
@@ -166,6 +175,7 @@ import ImagePicker from 'react-native-image-picker';
           placeholder="Enter Telefax Ex:+970 9 2330340"
            onChangeText={ TextInputValue=>this.setState({TE:TextInputValue}) }
            underlineColorAndroid='transparent'
+           keyboardType='numeric'
           style={Styles.TextInputStyleClass}
           />
            <TextInput

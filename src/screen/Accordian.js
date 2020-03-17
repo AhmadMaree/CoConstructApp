@@ -10,6 +10,7 @@ export default class Accordian extends Component{
         this.state = { 
           data: props.data,
           expanded : false,
+          
         }
     }
   
