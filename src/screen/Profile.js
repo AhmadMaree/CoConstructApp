@@ -28,8 +28,9 @@ class Profile extends Component {
           data :null,
           avatarSource : null,
           photoname : '',
-          allData : {},
+          allData : [],
           length : 0 ,
+          avatarSource1 : null,
         }
       }
 
@@ -39,7 +40,7 @@ class Profile extends Component {
         this.state.emailEw= EW;
         let url = "http://192.168.1.103:8088/get_all_Profile/"+this.state.emailEw ;
         fetch(url).then(results=>results.json())
-        .then(results=>this.setState({'allData':results}));
+        .then(results=>this.setState({'allData':results.response}));
        
        }
       
@@ -104,6 +105,11 @@ class Profile extends Component {
     render(){
       const {EW} = this.props.navigation.state.params;
       this.state.emailEw= EW;
+
+      this.state.allData.forEach((item)=>{
+          this.state.avatarSource = encodeURI("http://192.168.1.103:8088/load_image1?img=" + `${item.photo}`)
+      });
+    
         return(
             <View style={Styles.connt}>
             <StatusBar backgroundColor='#1c313a' barStyle='light-content'>

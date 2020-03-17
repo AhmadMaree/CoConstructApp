@@ -12,13 +12,13 @@ import { ScrollView } from 'react-native-gesture-handler';
     this.state = {
      
       email:'',
+      avatarSource :null ,
+      allData : [],
+      username : '',
       
   }
     //const {navigate} = this.props.navigation
- 
-      
-      this.proileImage =
-        '../Images/profil-image.png';
+
       
       this.items = [
         {
@@ -44,16 +44,37 @@ import { ScrollView } from 'react-native-gesture-handler';
         
       ];
     }
+
+
+    componentDidMount(){
+      const { Email } = this.props.navigation.state.params;
+      this.state.email = Email;
+        let url = "http://192.168.1.103:8088/get_all_Profile/"+this.state.email ;
+        fetch(url).then(results=>results.json())
+        .then(results=>this.setState({'allData':results.response}));
+    }
+
+
     render() {
       const { Email } = this.props.navigation.state.params;
       this.state.email = Email;
+      this.state.allData.forEach((item)=>{
+        this.state.avatarSource = encodeURI("http://192.168.1.103:8088/load_image1?img=" + `${item.photo}`);
+        this.state.username = `${item.username}` ;
+    });
       return (
         <ScrollView >
            <ImageBackground source={require('../Images/green.jpg')} style={{width:undefined, padding :32 ,paddingTop:48}}> 
+           {this.state.avatarSource == null ?
            <Image
             source={require('../Images/profil-image.png')}
-            style={styles.sideMenuProfileIcon}/> 
-            <Text style={styles.name1}>{this.state.email}</Text>
+            style={styles.sideMenuProfileIcon}/>
+            : 
+            <Image
+            source={{uri:this.state.avatarSource}}
+            style={styles.sideMenuProfileIcon}/>
+           }
+            <Text style={styles.name1}>{this.state.username}</Text>
           </ImageBackground>
           {/*Divider between Top Image and Sidebar Option*/}
           

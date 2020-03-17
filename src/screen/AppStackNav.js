@@ -17,7 +17,7 @@ import { State } from 'react-native-gesture-handler';
 import Changepassword from './Changepassword';
 import Feedback from './Feedback';
 import Officeadd from './Officeadd';
-
+import AddWorker from './Addworker';
 
 const AppNavigator = createStackNavigator({
     //Screens   
@@ -73,6 +73,16 @@ const AppNavigator = createStackNavigator({
         screen : Officeadd,
         navigationOptions:{
             title : 'Insert Office',
+            headerStyle : {
+                backgroundColor : '#7BB062',
+            },
+            headerTintColor : '#fff',
+        }
+    },
+    AddWorker: {
+        screen : AddWorker,
+        navigationOptions:{
+            title : 'Insert Worker',
             headerStyle : {
                 backgroundColor : '#7BB062',
             },

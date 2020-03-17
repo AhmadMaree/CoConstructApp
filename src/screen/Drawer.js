@@ -23,6 +23,7 @@ import Login from './login';
 import Requrmint from './Requrmint';
 import Feedback from './Feedback'
 import ListRow from './ListRow';
+import Work from './Work';
 class Drawer extends Component {
 
 
@@ -159,6 +160,22 @@ class Drawer extends Component {
     },
    
   });
+
+  const SevActivity_StackNavigator = createStackNavigator({
+    //All the screen from the Screen1 will be indexed here
+    First4: {
+      screen: Work,
+      navigationOptions: ({ navigation }) => ({
+        title: 'Worker',
+        headerLeft: <Drawer navigationProps={navigation} />,
+        headerStyle: {
+          backgroundColor: '#7BB062',
+        },
+        headerTintColor: '#fff',
+      }),
+    },
+   
+  });
  
 
   const DrawerNavigator = createDrawerNavigator({
@@ -205,6 +222,13 @@ class Drawer extends Component {
         screen: SixActivity_StackNavigator,
         navigationOptions: {
           drawerLabel: 'Feedback ',
+        },
+      },
+      Work: {
+        //Title
+        screen: SevActivity_StackNavigator,
+        navigationOptions: {
+          drawerLabel: 'Worker ',
         },
       },
 

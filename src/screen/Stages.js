@@ -210,7 +210,30 @@ import {
           </View>
          </Right>
          </CardItem>
-         </Card>   
+         </Card>  
+         <Card> 
+         <CardItem style={{backgroundColor:"#fff" }}>
+        <Left style>
+          <Thumbnail
+          source={require('../Images/worker.jpg')} style={{width:90,height:70,borderRadius:10,marginRight:5}}/>
+          <View style={{alignItems:'flex-start',Top:-10}}> 
+            <Title style={{color:"#7BB062" , padding : 6}}>
+                Worker
+            </Title>
+          </View>
+        </Left>
+         <Right>
+         <View >
+          <TouchableOpacity  onPress={() => this.props.navigation.navigate('Work')} >
+        
+           <Icon name="arrow-right" size={25} color='#7BB062' style={{marginTop:12}} />
+        
+        
+          </TouchableOpacity>
+          </View>
+         </Right>
+         </CardItem>
+          </Card>
          </Container>
           
           </View>
