@@ -15,6 +15,7 @@ import FoldView from 'react-native-foldview';
 
 import ProfileDetailCard from './ProfileDetailCard';
 import AdditionalInfoCard from './AdditionalInfoCard';
+import SendSMS from 'react-native-sms'
 
 export default class Row extends Component {
   constructor(props) {
@@ -94,6 +95,25 @@ export default class Row extends Component {
     );
   }
 
+  Send_SMS() {
+    SendSMS.send({
+        //Message body
+        body: 'send Your Message',
+        //Recipients Number
+        recipients: [this.props.PN],
+        //An array of types that would trigger a "completed" response when using android
+        successTypes: ['sent', 'queued']
+    }, (completed, cancelled, error) => {
+        if(completed){
+          console.log('SMS Sent Completed');
+        }else if(cancelled){
+          console.log('SMS Sent Cancelled');
+        }else if(error){
+          console.log('Some error occured');
+        }
+    });
+  }
+
   render() {
     const onPress = this.props.onPress;
 
@@ -116,9 +136,6 @@ export default class Row extends Component {
             }}
           >
 
-          <Text style={{fontFamily:'Bellota-LightItalic',marginLeft:50}}> Jawwal:{this.props.PN}</Text>
-           
-           
             <View
               style={{
                 marginTop: 10,
@@ -128,13 +145,13 @@ export default class Row extends Component {
             >
               
               <TouchableOpacity onPress={onPress} style={{  width: 40,
-  height: 40,
-  marginLeft: 8,
-alignItems:'center',
-  //backgroundColor: '#7BB062',
-  marginTop:-20}} >
-           <Icon name="arrow-up" size={25} color='#7BB062' style={{marginTop:12}} />
-        </TouchableOpacity>
+                      height: 40,
+                      marginLeft: 8,
+                    alignItems:'center',
+                      //backgroundColor: '#7BB062',
+                      marginTop:-20}} >
+               <Icon name="arrow-up" size={25} color='#7BB062' style={{marginTop:12}} />
+             </TouchableOpacity>
               
 
               <View
@@ -146,9 +163,17 @@ alignItems:'center',
                   
                 }}
               >
+                <View>
                 
-              <Text style={{fontFamily:'Bellota-LightItalic',marginLeft:0}}> {this.props.EM}</Text>
-              <Text style={{fontFamily:'Bellota-LightItalic',marginLeft:0}}> {this.props.FA}</Text>
+              <TouchableOpacity style={style1.buttonlogin}  onPress={()=> this.props.nav1.navigate('Booking')} >
+                          <Text style={style1.buttnTextlogin}>Booking</Text>
+              </TouchableOpacity>
+              <TouchableHighlight onPress={this.Send_SMS.bind(this)} style={style1.buttonlogin1} >
+                          <Text style={style1.buttnTextlogin}>Send SMS</Text>
+              </TouchableHighlight>
+              </View>
+                
+              
               </View>
 
             </View>
@@ -176,3 +201,43 @@ alignItems:'center',
     );
   }
 }
+
+const style1 = StyleSheet.create({
+
+buttonlogin : {
+  width : 100,
+  backgroundColor : '#7BB062',
+  marginLeft : 100
+
+  
+
+} ,
+buttnTextlogin : {
+  fontSize :16 ,
+  fontWeight : '500',
+  color : '#ffffff' , 
+  textAlign : 'center'
+
+
+},
+buttonlogin1 : {
+  width : 100,
+  backgroundColor : '#ffd24d',
+  marginLeft : 100,
+  marginTop : 5,
+
+  
+
+},
+buttonlogin2 : {
+  width : 100,
+  backgroundColor : '#7BB062',
+  marginLeft : 100,
+  marginTop : 5,
+
+  
+
+}
+
+
+})

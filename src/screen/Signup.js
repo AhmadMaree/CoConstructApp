@@ -2,6 +2,7 @@ import React,{Component} from 'react';
 import {HelperText} from 'react-native-paper'
 import Icon from "react-native-vector-icons/Ionicons";
 import LinearGradient from "react-native-linear-gradient";
+import RNPickerSelect from 'react-native-picker-select';
 import {
   
   StyleSheet,
@@ -27,6 +28,7 @@ export default class Signup extends Component {
           Email: '',
           Pass: '',
           CPass: '',
+          iduser : '',
           ErrFlagName: false,
           ErrFlagEmail: false,
           ErrFlagPass: false,
@@ -356,15 +358,16 @@ export default class Signup extends Component {
     if (!(this.state.ErrFlagName || this.state.ErrFlagEmail ||
       this.state.ErrFlagPass || this.state.ErrFlagCPass ||
       this.state.Name === '' || this.state.Email === '' ||
-      this.state.Pass === '' || this.state.CPass === '')) {
+      this.state.Pass === '' || this.state.CPass === ''|| this.state.iduser === '')) {
 
-        let url2 = 'http://192.168.1.107:8088/Insertsingup/'+this.state.Name+'/'+this.state.Email+'/'+this.state.Pass;
+        let url2 = 'http://192.168.1.103:8088/Insertsingup/'+this.state.iduser+'/'+this.state.Name+'/'+this.state.Email+'/'+this.state.Pass;
           const data = new FormData();
          data.append("username",this.state.Name);
-          data.append("email",this.state.Email);
+         data.append("email",this.state.Email);
          data.append("password",this.state.Pass);
+         data.append("iduser",this.state.iduser);
   
-  
+          console.log(this.state.id);
    fetch(url2, { method: 'POST',body:data})
    .then(response => response.json()) 
    .then(json => {if(json.result === "failed"){
@@ -403,6 +406,17 @@ export default class Signup extends Component {
               <View>
               {this.state.CPass == '' ? this.renderInputTextCPass() : this.renderInputTextCPassWithIcon()}
               </View> 
+              
+              <RNPickerSelect
+                    onValueChange={(value) => this.setState({iduser: value})}
+                    //value={this.state.id}
+                    //onChangeText={(value)=> this.setState({id : value})}
+                    items={[
+                        { label: 'Office', value: '0' },
+                        { label: 'User', value: '1' },
+                    ]}
+                 />
+                  
          
                 <TouchableOpacity
                   onPress={ this.signUpUser}

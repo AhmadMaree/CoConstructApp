@@ -44,6 +44,8 @@ export default class ListRow extends Component {
                 FA ={item.FA}
                 TE = {item.TE}
                 photo= {item.photo}
+                nav= {this.props.navigation}
+                
             />
 
 

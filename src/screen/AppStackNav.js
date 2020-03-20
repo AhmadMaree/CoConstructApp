@@ -11,13 +11,17 @@ import Requrmint from './Requrmint';
 
 import { createAppContainer} from 'react-navigation'
 
-import { createStackNavigator } from 'react-navigation-stack';
+import { createStackNavigator, HeaderBackButton } from 'react-navigation-stack';
 import Profile from './Profile';
 import { State } from 'react-native-gesture-handler';
 import Changepassword from './Changepassword';
 import Feedback from './Feedback';
 import Officeadd from './Officeadd';
 import AddWorker from './Addworker';
+import Officerpage from './Officerpage';
+import Booking from './Booking';
+import Row from './Row';
+import ShowBooking from './ShowBooking';
 
 const AppNavigator = createStackNavigator({
     //Screens   
@@ -88,7 +92,35 @@ const AppNavigator = createStackNavigator({
             },
             headerTintColor : '#fff',
         }
+    },
+    Officerpage :{
+        screen : Officerpage ,
+        navigationOptions: {
+            header: null
+        },
+       
+    },
+    Booking:{
+            screen :Booking ,
+            navigationOptions:{
+                title : 'Booking Information',
+                headerStyle : {
+                    backgroundColor : '#7BB062',
+                },
+                headerTintColor : '#fff',
+            }
+    },
+    ShowBooking : {
+        screen : ShowBooking ,
+        navigationOptions :{
+            title: 'Booking',
+            headerStyle : {
+                backgroundColor : '#7BB062',
+            },
+            headerTintColor : '#fff',
+        }
     }
+
 },
   {
     //settings

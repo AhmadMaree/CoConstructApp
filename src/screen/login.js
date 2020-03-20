@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import Checkbox from 'react-native-custom-checkbox';
-
+import RNPickerSelect from 'react-native-picker-select';
 import { Item, Input, Label } from 'native-base';
 import {
   
@@ -33,7 +33,8 @@ export default class Login extends Component {
                 checked1: false,
                 email:'',
                 pass:'',
-                sec : ''
+                sec : '',
+                iduser :'',
             }
             //const {navigate} = this.props.navigation
          }
@@ -61,30 +62,57 @@ export default class Login extends Component {
     }
     onRegister = () => {
         if(!this.state.checked1){
-        if (!(this.state.email=== '' || this.state.pass === '')) {
+        if (!(this.state.email=== '' || this.state.pass === ''||this.state.iduser === '')) {
 
-        let url2 = 'http://192.168.1.103:8088/loginco/'+this.state.email+'/'+this.state.pass;
-        const data = new FormData();
-       
-        data.append("email",this.state.email);
-        data.append("password",this.state.pass);
-       
-      
-         fetch(url2, { method: 'post', body:data})
-         .then(response => response.json())
-         .then(json => {if(json.result === "failed"){
-             //AsyncStorage
-             ToastAndroid.show('Error with database. Please try again later. ', ToastAndroid.SHORT)       
-         }
-         else if(json.result === "success"){
-            ToastAndroid.show('Email Or Password incorrect', ToastAndroid.SHORT)
-        } 
-        else if(json.result === "in"){
-           this.props.navigation.navigate('Drawer',{Email: this.state.email})
-          }           
-                      }
-                      
-                      )  
+            if(this.state.iduser === '0'){
+                let url2 = 'http://192.168.1.103:8088/loginco/'+this.state.iduser+'/'+this.state.email+'/'+this.state.pass;
+                const data = new FormData();
+                data.append("iduser",this.state.iduser);
+                data.append("email",this.state.email);
+                data.append("password",this.state.pass);
+               
+              
+                 fetch(url2, { method: 'post', body:data})
+                 .then(response => response.json())
+                 .then(json => {if(json.result === "failed"){
+                     //AsyncStorage
+                     ToastAndroid.show('Error with database. Please try again later. ', ToastAndroid.SHORT)       
+                 }
+                 else if(json.result === "success"){
+                    ToastAndroid.show('Email Or Password incorrect ', ToastAndroid.SHORT)
+                } 
+                else if(json.result === "in"){
+                   this.props.navigation.navigate('Officerpage')
+                  }           
+                              }
+                              
+                              ) 
+        }else{
+
+            let url2 = 'http://192.168.1.103:8088/loginco/'+this.state.iduser+'/'+this.state.email+'/'+this.state.pass;
+            const data = new FormData();
+            data.append("iduser",this.state.iduser);
+            data.append("email",this.state.email);
+            data.append("password",this.state.pass);
+           
+          
+             fetch(url2, { method: 'post', body:data})
+             .then(response => response.json())
+             .then(json => {if(json.result === "failed"){
+                 //AsyncStorage
+                 ToastAndroid.show('Error with database. Please try again later. ', ToastAndroid.SHORT)       
+             }
+             else if(json.result === "success"){
+                ToastAndroid.show('Email Or Password incorrect', ToastAndroid.SHORT)
+            } 
+            else if(json.result === "in"){
+               this.props.navigation.navigate('Drawer',{Email: this.state.email})
+              }           
+                          }
+                          
+                          )  
+
+        }
         } else {
             ToastAndroid.show('Must Fill the Boxs', ToastAndroid.SHORT)
         }
@@ -143,6 +171,17 @@ export default class Login extends Component {
              placeholderTextColor="#ffffff"
              secureTextEntry={true}
              onChangeText={ TextInputValue => this.setState({ pass : TextInputValue }) }/>
+             {this.state.checked1 ? null :
+             <RNPickerSelect
+                    onValueChange={(value) => this.setState({iduser: value})}
+                    //value={this.state.id}
+                    //onChangeText={(value)=> this.setState({id : value})}
+                    items={[
+                        { label: 'Office', value: '0' },
+                        { label: 'User', value: '1' },
+                    ]}
+                 />
+                }
              {this.state.checked1 ? <Item stackedLabel >
                      <Label style={{ color: "#7BB062" }} >SecureCode</Label>
                         <TextInput style={formStyles.inputtext}
@@ -157,6 +196,7 @@ export default class Login extends Component {
     
                 
             </View>
+
 
             <View style={formStyles.forcheckbox}>
                 <Checkbox name='checkbox1' size={20}
