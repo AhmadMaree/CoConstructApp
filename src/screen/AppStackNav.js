@@ -22,6 +22,8 @@ import Officerpage from './Officerpage';
 import Booking from './Booking';
 import Row from './Row';
 import ShowBooking from './ShowBooking';
+import DeleteOffice from './DeleteOffice';
+import DeleteWorker from './DeleteWorker';
 
 const AppNavigator = createStackNavigator({
     //Screens   
@@ -114,6 +116,26 @@ const AppNavigator = createStackNavigator({
         screen : ShowBooking ,
         navigationOptions :{
             title: 'Booking',
+            headerStyle : {
+                backgroundColor : '#7BB062',
+            },
+            headerTintColor : '#fff',
+        }
+    },
+    DeleteOffice :{
+        screen : DeleteOffice ,
+        navigationOptions:{
+            title : 'Delete Office',
+            headerStyle : {
+                backgroundColor : '#7BB062',
+            },
+            headerTintColor : '#fff',
+        }
+    },
+    DeleteWorker :{
+        screen : DeleteWorker ,
+        navigationOptions:{
+            title : 'Delete Worker',
             headerStyle : {
                 backgroundColor : '#7BB062',
             },

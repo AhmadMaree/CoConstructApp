@@ -10,6 +10,7 @@ import {
   
 } from "react-native";
 import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon1 from 'react-native-vector-icons/SimpleLineIcons';
 
 import {Container,Header,Body,Checkbox,Title,Card,CardItem,Left,Right,Content,Grid,Col,Text,Button, Thumbnail, Subtitle}from 'native-base'
 export default class Admin extends Component{
@@ -27,7 +28,9 @@ export default class Admin extends Component{
                 <Body>
                 <Title>Co Construct</Title>
                 </Body>
-                <Right/>
+                <Right>
+                <Icon1  onPress={()=> this.props.navigation.navigate('Login')} name='logout' style={{fontSize: 20, color: '#efefef'}}/>
+                </Right>
                 </Header>
             <StatusBar backgroundColor='#1c313a' barStyle='light-content'>
             </StatusBar>
@@ -46,8 +49,8 @@ export default class Admin extends Component{
                   </CardItem>
               </Card>
 
-      <Card style={{height:120}} >
-        <CardItem style={{backgroundColor:"#efefef",height:120}}>
+      <Card style={{height:160}} >
+        <CardItem style={{backgroundColor:"#efefef",height:160}}>
           <Left style>
             <Thumbnail
             source={require('../Images/surfeng.jpg')} style={{width:120,height:70,borderRadius:10,marginRight:5}}/>
@@ -71,8 +74,8 @@ export default class Admin extends Component{
            </Right>
            </CardItem>
            </Card>  
-           <Card style={{height:120}}>
-        <CardItem style={{backgroundColor:"#efefef",height:120}}>
+           <Card style={{height:160}}>
+        <CardItem style={{backgroundColor:"#efefef",height:160}}>
           <Left style>
             <Thumbnail
             source={require('../Images/EngOffice.jpg')} style={{width:120,height:70,borderRadius:10,marginRight:5}}/>
@@ -86,18 +89,40 @@ export default class Admin extends Component{
             </View>
           </Left>
            <Right>
+            <View>
            <Icon.Button
              name="arrow-right"
              backgroundColor="#455a64"
+             style={{paddingLeft :16 , paddingRight : 10}}
              onPress={()=> this.props.navigation.navigate('Officeadd')}
              >
-           EDIT
+            Insert
             </Icon.Button>
+            </View>
+            <View style={{marginTop : 4}}>
+            <Icon.Button
+             name="arrow-right"
+             backgroundColor="#455a64"
+             onPress={()=> this.props.navigation.navigate('DeleteOffice')}
+             >
+            Update
+            </Icon.Button>
+           </View>
+           <View style={{marginTop :4}}>
+            <Icon.Button
+             name="arrow-right"
+             backgroundColor="#455a64"
+             style={{paddingLeft :14 , paddingRight : 8}}
+             onPress={()=> this.props.navigation.navigate('DeleteOffice')}
+             >
+             Delete
+            </Icon.Button>
+            </View>
            </Right>
            </CardItem>
            </Card> 
-           <Card style={{height:120}}>
-        <CardItem style={{backgroundColor:"#efefef",height:120}}>
+           <Card style={{height:160}}>
+        <CardItem style={{backgroundColor:"#efefef",height:160}}>
           <Left style>
             <Thumbnail
             source={require('../Images/worker.jpg')} style={{width:120,height:70,borderRadius:10,marginRight:5}}/>
@@ -111,13 +136,36 @@ export default class Admin extends Component{
             </View>
           </Left>
            <Right>
+          <View >
            <Icon.Button
              name="arrow-right"
              backgroundColor="#455a64"
+             style={{paddingLeft :16 , paddingRight : 16}}
              onPress={()=> this.props.navigation.navigate('AddWorker')}
              >
           EDIT
             </Icon.Button>
+            </View>
+            <View style={{marginTop :4}}>
+            <Icon.Button
+             name="arrow-right"
+             backgroundColor="#455a64"
+             
+             onPress={()=> this.props.navigation.navigate('AddWorker')}
+             >
+          Update
+            </Icon.Button>
+            </View>
+            <View style={{marginTop :4}}>
+            <Icon.Button
+             name="arrow-right"
+             backgroundColor="#455a64"
+             style={{paddingLeft :14 , paddingRight : 8}}
+             onPress={()=> this.props.navigation.navigate('DeleteWorker')}
+             >
+          Delete
+            </Icon.Button>
+            </View>
            </Right>
            </CardItem>
            </Card> 
@@ -146,9 +194,6 @@ export default class Admin extends Component{
            </CardItem>
            </Card>
 
-           <TouchableOpacity style={formStyles.buttonlogin} onPress={() => this.props.navigation.navigate('Login')}>
-                 <Text style={formStyles.buttnTextlogin}>Let's Start</Text>
-             </TouchableOpacity>
          
            </Container> 
     ); 
