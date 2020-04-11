@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "834119776251",
+    "firebase_url": "https://newprojecttest-ddb51.firebaseio.com",
+    "project_id": "newprojecttest-ddb51",
+    "storage_bucket": "newprojecttest-ddb51.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:834119776251:android:5f8bc3fd515b7945027d5e",
+        "android_client_info": {
+          "package_name": "com.ahmadproj"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "834119776251-mmmui23pn7d1vp0l781h9i82snaatlfu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6BwHb68XphaVFRJZIhYOgz-nUduRibvU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "834119776251-mmmui23pn7d1vp0l781h9i82snaatlfu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

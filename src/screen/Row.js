@@ -96,7 +96,7 @@ export default class Row extends Component {
       <View style={styles.container1}>
 
       <View style={styles.leftPane}>
-      <Image source={{ uri: encodeURI("http://192.168.1.103:8088/load_image1?img=" + this.props.photo)}} style={{width : "100%" , height : "100%", flex:1}} />
+      <Image source={{ uri: encodeURI("http://192.168.1.106:8088/load_image1?img=" + this.props.photo)}} style={{width : "100%" , height : "100%", flex:1}} />
     
       </View>
   

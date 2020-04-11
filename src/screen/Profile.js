@@ -38,7 +38,7 @@ class Profile extends Component {
       componentDidMount() {
         const {EW} = this.props.navigation.state.params;
         this.state.emailEw= EW;
-        let url = "http://192.168.1.103:8088/get_all_Profile/"+this.state.emailEw ;
+        let url = "http://192.168.1.106:8088/get_all_Profile/"+this.state.emailEw ;
         fetch(url).then(results=>results.json())
         .then(results=>this.setState({'allData':results.response}));
        
@@ -78,7 +78,7 @@ class Profile extends Component {
   } 
 
    onRegister = () => {
-   let url2 = 'http://192.168.1.105:8088/Image_upload/'+this.state.emailEw;
+   let url2 = 'http://192.168.1.106:8088/Image_upload/'+this.state.emailEw;
    // var imageName = this.state.imageName;
     const data1 = new FormData();
     data1.append("email",this.state.emailEw);
@@ -107,7 +107,7 @@ class Profile extends Component {
       this.state.emailEw= EW;
 
       this.state.allData.forEach((item)=>{
-          this.state.avatarSource = encodeURI("http://192.168.1.103:8088/load_image1?img=" + `${item.photo}`)
+          this.state.avatarSource = encodeURI("http://192.168.1.106:8088/load_image1?img=" + `${item.photo}`)
       });
     
         return(

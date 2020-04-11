@@ -41,6 +41,7 @@ class Drawer extends Component {
            //BackHandler.exitApp();
            return true;
    }
+   
     //Structure for the navigatin Drawer
     toggleDrawer = () => {
       //Props to open/close the drawer
@@ -67,7 +68,7 @@ class Drawer extends Component {
   }
   const FirstActivity_StackNavigator = createStackNavigator({
     //All the screen from the Screen1 will be indexed here
-    First: {
+    First5: {
       screen: Stages,
       navigationOptions: ({ navigation }) => ({
         title: 'Co Construct',

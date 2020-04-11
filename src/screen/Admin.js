@@ -6,14 +6,23 @@ import {
   TouchableOpacity,
   View,
   StatusBar,
-  Animated
+  Animated,
+  AsyncStorage,
   
 } from "react-native";
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Icon1 from 'react-native-vector-icons/SimpleLineIcons';
 
 import {Container,Header,Body,Checkbox,Title,Card,CardItem,Left,Right,Content,Grid,Col,Text,Button, Thumbnail, Subtitle}from 'native-base'
+
 export default class Admin extends Component{
+
+
+
+  singout = () => {
+    AsyncStorage.clear();
+    this.props.navigation.navigate("Login");
+  }
 
   render(){
     return(
@@ -29,7 +38,7 @@ export default class Admin extends Component{
                 <Title>Co Construct</Title>
                 </Body>
                 <Right>
-                <Icon1  onPress={()=> this.props.navigation.navigate('Login')} name='logout' style={{fontSize: 20, color: '#efefef'}}/>
+                <Icon1  onPress={this.singout} name='logout' style={{fontSize: 20, color: '#efefef'}}/>
                 </Right>
                 </Header>
             <StatusBar backgroundColor='#1c313a' barStyle='light-content'>

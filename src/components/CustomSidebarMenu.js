@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Image, Text, ImageBackground } from 'react-native';
+import { View, StyleSheet, Image, Text, ImageBackground , AsyncStorage } from 'react-native';
 import Icon from "react-native-vector-icons/FontAwesome";
 import { ScrollView } from 'react-native-gesture-handler';
 
@@ -24,7 +24,7 @@ import { ScrollView } from 'react-native-gesture-handler';
         {
           navOptionThumb: 'home',
           navOptionName: 'Home',
-          screenToNavigate: 'Stages',
+          screenToNavigate: 'First5',
         },
         {
           navOptionThumb: 'user-circle-o',
@@ -49,7 +49,7 @@ import { ScrollView } from 'react-native-gesture-handler';
     componentDidMount(){
       const { Email } = this.props.navigation.state.params;
       this.state.email = Email;
-        let url = "http://192.168.1.103:8088/get_all_Profile/"+this.state.email ;
+        let url = "http://192.168.1.106:8088/get_all_Profile/"+this.state.email ;
         fetch(url).then(results=>results.json())
         .then(results=>this.setState({'allData':results.response}));
     }
@@ -59,7 +59,7 @@ import { ScrollView } from 'react-native-gesture-handler';
       const { Email } = this.props.navigation.state.params;
       this.state.email = Email;
       this.state.allData.forEach((item)=>{
-        this.state.avatarSource = encodeURI("http://192.168.1.103:8088/load_image1?img=" + `${item.photo}`);
+        this.state.avatarSource = encodeURI("http://192.168.1.106:8088/load_image1?img=" + `${item.photo}`);
         this.state.username = `${item.username}` ;
     });
       return (
@@ -99,8 +99,14 @@ import { ScrollView } from 'react-native-gesture-handler';
                     
                   }}
                   onPress={() => {
-                    
+
+                     if(item.screenToNavigate === 'Login'){
+                          AsyncStorage.clear();
+                          console.log("ahmad");
+                     }
+                    console.log("asdadas")
                     this.props.navigation.navigate(item.screenToNavigate,{EW:this.state.email});
+
                   }}>
                   {item.navOptionName}
                 </Text>

@@ -26,7 +26,7 @@ export default class ListRow extends Component {
       }
  
     componentDidMount(){
-        fetch("http://192.168.1.103:8088/get_all_Office/").then(results=>results.json())
+        fetch("http://192.168.1.106:8088/get_all_Office/").then(results=>results.json())
         .then(results=>this.setState({'item' :results.response  
         }))
     }

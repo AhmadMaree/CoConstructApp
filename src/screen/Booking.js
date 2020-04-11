@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View,Text,Button,TextInput,TouchableOpacity } from 'react-native';
+import { StyleSheet, View,Text,Button,TextInput,TouchableOpacity  , AsyncStorage} from 'react-native';
 import { Table, Row, Rows } from 'react-native-table-component';
 import Checkbox from 'react-native-custom-checkbox';
 import RNPickerSelect from 'react-native-picker-select';
@@ -18,6 +18,8 @@ export default class Booking extends Component {
       name:'',
       tel:'',
       idd:'',
+      Token : '',
+      emailuser : '',
       addd:'',
       val:'false',
       checked1:'',
@@ -71,12 +73,17 @@ export default class Booking extends Component {
     
     
  }
-0
+
+ componentDidMount(){
+  this.getToken1()
+  this.getToken2()
+ }
+
  onRegister = () => {
   
   if (!(this.state.name=== '' || this.state.addd === '' || this.state.tel === '' || this.state.idd === '')) {
 
-  let url2 = 'http://192.168.1.103:8088/Sendtooffice/'+this.state.name+'/'+this.state.idd+'/'+this.state.tel+'/'+this.state.addd+'/'+this.state.checked1;
+  let url2 = 'http://192.168.1.106:8088/Sendtooffice/'+this.state.emailuser+'/'+this.state.name+'/'+this.state.idd+'/'+this.state.tel+'/'+this.state.addd+'/'+this.state.checked1;
   const data = new FormData();
  
   data.append("name",this.state.name);
@@ -84,6 +91,8 @@ export default class Booking extends Component {
   data.append("tel",this.state.tel);
   data.append("addd",this.state.addd);
   data.append("checked1",this.state.checked1);
+  data.append("emailuser",this.state.emailuser);
+  data.append("token",this.state.Token);
 
    fetch(url2, { method: 'post', body:data})
    .then(response => response.json())
@@ -101,8 +110,52 @@ export default class Booking extends Component {
       else {
       ToastAndroid.show('Must Fill the Boxs', ToastAndroid.SHORT)
     }
+
+
+ 
+  let url2 = 'http://192.168.1.106:8088/inserttoken/'+this.state.emailuser;
+                const data = new FormData();
+                 data.append("token",this.state.Token)
+                 fetch(url2, { method: 'post', body:data})
+                 .then(response => response.json())
+                 .then(json => {if(json.result === "failed"){
+                  
+                         
+                 }
+                 else if(json.result === "success"){
+                    
+                } }) 
+    
+
   
-  
+}
+async getToken1() {
+  try {
+    let userData = await AsyncStorage.getItem("Token");
+    let data = userData;
+    
+    if(data != null){
+      let d = data.toString();
+      this.state.Token=d ;
+      console.log(this.state.Token)
+    }
+  } catch (error) {
+    console.log("Something went wrong", error);
+  }
+}
+async getToken2() {
+  try {
+    let userData = await AsyncStorage.getItem("user1");
+    let data = userData;
+    
+    if(data != null){
+      let d = data.toString();
+      this.state.emailuser=d ;
+      console.log(this.state.emailuser)
+    }
+  } catch (error) {
+    console.log("Something went wrong", error);
+  }
 }
 
                                                                                   

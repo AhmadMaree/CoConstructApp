@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import Checkbox from 'react-native-custom-checkbox';
 import RNPickerSelect from 'react-native-picker-select';
+import PushNotification from "react-native-push-notification";
 import { Item, Input, Label } from 'native-base';
 import {
   
@@ -12,6 +13,8 @@ import {
   TouchableOpacity,
   ToastAndroid,
   BackHandler,
+  Alert,
+  AsyncStorage
 } from 'react-native';
 
 
@@ -26,6 +29,75 @@ import Logo from '../components/Logo';
 export default class Login extends Component {
 
 
+
+
+    async storeToken(user) {
+        try {
+           await AsyncStorage.setItem("user", user);
+        } catch (error) {
+          console.log("Something went wrong", error);
+        }
+      }
+      async storeToken1(user) {
+        try {
+           await AsyncStorage.setItem("user1", user);
+        } catch (error) {
+          console.log("Something went wrong", error);
+        }
+      }
+      async storeToken2(user) {
+        try {
+           await AsyncStorage.setItem("user2", user);
+        } catch (error) {
+          console.log("Something went wrong", error);
+        }
+      }
+      async getToken() {
+        try {
+          let userData = await AsyncStorage.getItem("user");
+          let data = userData;
+          
+          if(data != null){
+            let d = data.toString();
+            this.props.navigation.navigate('Officerpage');
+          }
+          console.log(data);
+        } catch (error) {
+          
+          console.log("Something went wrong", error);
+        }
+      }
+      async getToken1() {
+        try {
+          let userData = await AsyncStorage.getItem("user1");
+          let data = userData;
+          
+          if(data != null){
+            let d = data.toString();
+            this.state.email=d ;
+            this.props.navigation.navigate('Drawer',{Email: this.state.email})
+          }
+          console.log(data);
+        } catch (error) {
+          console.log("Something went wrong", error);
+        }
+      }
+      async getToken2() {
+        try {
+          let userData = await AsyncStorage.getItem("user2");
+          let data = userData;
+          
+          if(data != null){
+            let d = data.toString();
+            this.state.email=d ;
+            this.props.navigation.navigate('Admin',{Email: this.state.email}) 
+          }
+          console.log(data);
+        } catch (error) {
+          console.log("Something went wrong", error);
+        }
+      }
+
         
         constructor(props) {
             super(props);
@@ -38,13 +110,14 @@ export default class Login extends Component {
             }
             //const {navigate} = this.props.navigation
          }
-
-
-       
-
+         
+          
          componentDidMount() {
-            BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
             
+            BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
+            this.getToken()
+            this.getToken1()
+            this.getToken2()
            }
                
            componentWillUnmount() {
@@ -65,7 +138,7 @@ export default class Login extends Component {
         if (!(this.state.email=== '' || this.state.pass === ''||this.state.iduser === '')) {
 
             if(this.state.iduser === '0'){
-                let url2 = 'http://192.168.1.103:8088/loginco/'+this.state.iduser+'/'+this.state.email+'/'+this.state.pass;
+                let url2 = 'http://192.168.1.106:8088/loginco/'+this.state.iduser+'/'+this.state.email+'/'+this.state.pass;
                 const data = new FormData();
                 data.append("iduser",this.state.iduser);
                 data.append("email",this.state.email);
@@ -82,14 +155,15 @@ export default class Login extends Component {
                     ToastAndroid.show('Email Or Password incorrect ', ToastAndroid.SHORT)
                 } 
                 else if(json.result === "in"){
-                   this.props.navigation.navigate('Officerpage')
+                   this.props.navigation.navigate('Officerpage');
+                   this.storeToken(this.state.email);
                   }           
                               }
                               
                               ) 
         }else{
 
-            let url2 = 'http://192.168.1.103:8088/loginco/'+this.state.iduser+'/'+this.state.email+'/'+this.state.pass;
+            let url2 = 'http://192.168.1.106:8088/loginco/'+this.state.iduser+'/'+this.state.email+'/'+this.state.pass;
             const data = new FormData();
             data.append("iduser",this.state.iduser);
             data.append("email",this.state.email);
@@ -107,6 +181,8 @@ export default class Login extends Component {
             } 
             else if(json.result === "in"){
                this.props.navigation.navigate('Drawer',{Email: this.state.email})
+               this.storeToken1(this.state.email);
+
               }           
                           }
                           
@@ -121,7 +197,7 @@ export default class Login extends Component {
     }
     else {
         if (!(this.state.email=== '' || this.state.pass === ''||this.state.sec === '')) {
-        let url2 = 'http://192.168.1.103:8088/loginn/'+this.state.email+'/'+this.state.pass+'/'+this.state.sec;
+        let url2 = 'http://192.168.1.106:8088/loginn/'+this.state.email+'/'+this.state.pass+'/'+this.state.sec;
         const data = new FormData();
        
         data.append("email",this.state.email);
@@ -140,6 +216,7 @@ export default class Login extends Component {
         } 
         else if(json.result === "in"){
             this.props.navigation.navigate('Admin',{Email: this.state.email})
+            this.storeToken2(this.state.email);
           }           
                       }
                       

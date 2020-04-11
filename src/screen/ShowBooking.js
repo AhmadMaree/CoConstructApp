@@ -1,6 +1,7 @@
 import { ListItem } from 'react-native-elements'
 import React, { Component } from 'react';
 import { Table, Row, Rows } from 'react-native-table-component';
+import AsyncStorage from '@react-native-community/async-storage';
 
 import {
   AppRegistry,
@@ -17,6 +18,7 @@ import {
 } from "react-native";
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {Container,Header,Body,Checkbox,Title,Card,CardItem,Left,Right,Content,Grid,Col, Thumbnail, Subtitle}from 'native-base'
+
 export default class Show extends Component {
 
   constructor(props) {
@@ -44,10 +46,10 @@ export default class Show extends Component {
 
   }
 
-  toggle =() => {
+  toggle = idd => {
     
     
-    let url2 = 'http://192.168.1.103:8088/insertaccess/'+this.state.flag1+'/'+this.state.ide;
+    let url2 = 'http://192.168.1.106:8088/insertaccess/'+this.state.flag1+'/'+idd;
     const data = new FormData();
     data.append("flag",this.state.flag1);
     data.append("ide",this.state.ide);
@@ -66,10 +68,11 @@ export default class Show extends Component {
 
   }
 
-  toggle1 =() => {
+  toggle1 =idd=>{
     
+   
     
-    let url2 = 'http://192.168.1.103:8088/insertaccess/'+this.state.flag+'/'+this.state.ide;
+    let url2 = 'http://192.168.1.106:8088/insertaccess/'+this.state.flag+'/'+idd;
     const data = new FormData();
     data.append("flag",this.state.flag);
     data.append("ide",this.state.ide);
@@ -89,7 +92,7 @@ export default class Show extends Component {
   }
 
 
-  renderItem = ({ item }) => {
+  renderItem = ({ item ,index}) => {
 
       this.state.nam=item.name;
       this.state.ide= item.idd;
@@ -102,8 +105,8 @@ export default class Show extends Component {
             this.state.ch = "No"
       }
        const state=this.state
-       this.state.buttons=[<Button onPress={this.toggle} title ={'Accept'} color="#47d147"  />],
-       this.state.buttons1=[<Button onPress={this.toggle1}  title ={'Reject'} color="#ff1a1a" />],
+       this.state.buttons=[<Button onPress={()=>this.toggle(item.idd)} title ={'Accept'} color="#47d147"  />],
+       this.state.buttons1=[<Button onPress={()=>this.toggle1(item.idd)}  title ={'Reject'} color="#ff1a1a" />],
        
        this.state.tableHead =[<Text style={{marginLeft :100}}> Details {this.state.nam}</Text>],
        this.state.tableData = [
@@ -141,7 +144,7 @@ export default class Show extends Component {
 
   componentDidMount() {
 
-    fetch("http://192.168.1.103:8088/get_show/").then(results=>results.json())
+    fetch("http://192.168.1.106:8088/get_show/").then(results=>results.json())
     .then(results=>this.setState({'item':results.response,'len':results.length}));
    
   }
@@ -157,6 +160,7 @@ export default class Show extends Component {
         <FlatList
           data={this.state.item}
           renderItem={this.renderItem}
+          keyExtractor ={item => item.idd}
         />
 
 

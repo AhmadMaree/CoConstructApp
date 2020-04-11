@@ -14,30 +14,28 @@ import {
   View,
   Text,
   StatusBar,
-  Button
+  Button,
+  Alert,
+  ToastAndroid,
 
 } from 'react-native';
 
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
 import AppStackNav from './src/screen/AppStackNav';
-import Profile from './src/screen/Profile'
+import PushNotification from 'react-native-push-notification';
+
+// var PushNotification = require("react-native-push-notification");
 export default class App extends Component{
   constructor(props) {
     super(props);
-    this.state = {
-    }
   }
+
+  
+ 
+  
   render(){
   return (
    
-    <AppStackNav/>
+     <AppStackNav/>
      
   );};
  }

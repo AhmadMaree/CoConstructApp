@@ -2,6 +2,7 @@ import React,{Component} from 'react';
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import StepIndicator from 'react-native-step-indicator';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import PushNotification from 'react-native-push-notification';
 import {Container,Header,Body,Checkbox,Title,Card,CardItem,Left,Right,Content,Grid,Col,Text,Button, Thumbnail, Subtitle}from 'native-base';
 
 import {
@@ -12,7 +13,8 @@ import {
   AppRegistry,
   StatusBar,
   TouchableOpacity,
- 
+  AsyncStorage,
+  Alert
 } from 'react-native';
 
 
@@ -45,6 +47,7 @@ import {
     currentStepLabelColor: '#7BB062'
   }
   
+
   
   const getStepIndicatorIconConfig = ({ position, stepStatus }) => {
     const iconConfig = {
@@ -85,8 +88,124 @@ import {
     constructor () {
         super()
         this.state = {
-          currentPage: 0
+          currentPage: 0,
+          email1:'',
+          Token : '',
         }
+      }
+
+      componentDidMount(){
+        this.getToken1();
+        this.configureNotifications();
+      }
+      async getToken1() {
+        try {
+          let userData = await AsyncStorage.getItem("user1");
+          let data = userData;
+          
+          if(data != null){
+            let d = data.toString();
+            this.state.email1=d ;
+            console.log(this.state.email1)
+          }
+        } catch (error) {
+          console.log("Something went wrong", error);
+        }
+      }
+      
+      configureNotifications() {
+        PushNotification.configure({
+          // (optional) Called when Token is generated (iOS and Android)
+          
+          onRegister: function(token) {
+            console.log("TOKEN:", token.token);
+            
+            AsyncStorage.setItem("Token",token.token);
+            
+          },
+
+        
+          // (required) Called when a remote or local notification is opened or received
+          onNotification: function(notification) {
+            console.log("NOTIFICATION:", notification);
+        
+            if (!notification.foreground) {
+              if (notification.name == null) {
+                
+                
+              }
+              else {
+                console.log("ahamdmaree")
+                this.props.navigation.navigate('receiveNotification', {
+
+                  img_name: notification.name,
+                  img_description: notification.description,
+                  
+                })
+              }
+              
+            }
+            else {
+              if (notification.name == null) {
+                Alert.alert("Someone SEND Attintion For you", "Would you like to show the message?",
+                  [
+                    {
+                      text: 'Cancel',
+                      onPress: () => console.log('Cancel Pressed'),
+                      style: 'cancel',
+                    },
+                    {
+                      text: 'OK',
+                      onPress: () => {
+                        this.props.navigation.navigate('SendNotification',
+                        {
+                          token: notification.sender_token,
+                          username: notification.sender_username,
+                          hideBackArrow: false
+                        })
+                        
+                      }
+                    }
+                  ],
+                  { cancelable: false })
+              }
+              else {
+                Alert.alert("You've Recive a massege", "Would you like to show the message?",
+                  [
+                    {
+                      text: 'Cancel',
+                      onPress: () => console.log('Cancel Pressed'),
+                      style: 'cancel',
+                    },
+                    {
+                      text: 'OK',
+                      onPress: () => {
+    
+                        this.props.navigation.navigate('ReceiveNotification',{
+                          img_name: notification.name,
+                          img_description: notification.description,
+                        })
+                      }
+                    }
+                  ],
+                  { cancelable: false })
+              }
+            }
+          }.bind(this),
+          // Android only
+          senderID: "834119776251",
+          // iOS only
+         /* permissions: {
+            alert: true,
+            badge: true,
+            sound: true
+          },*/
+          popInitialNotification: true,
+          requestPermissions: true
+        });
+
+        
+    
       }
     
       onStepPress = position => {
