@@ -10,7 +10,7 @@ import {
 
 import Row from './Row';
 import { FlatList } from 'react-native-gesture-handler';
-
+import IP from './Ip';
 const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : 0;
 
 
@@ -26,7 +26,7 @@ export default class ListRow extends Component {
       }
  
     componentDidMount(){
-        fetch("http://192.168.1.106:8088/get_all_Office/").then(results=>results.json())
+        fetch('http://'+IP.ip+':8088/get_all_Office/').then(results=>results.json())
         .then(results=>this.setState({'item' :results.response  
         }))
     }

@@ -330,6 +330,32 @@ import {
          </Right>
          </CardItem>
          </Card>  
+         <Card >
+      <CardItem style={{backgroundColor:"#fff" }}>
+        <Left style>
+          <Thumbnail
+          source={require('../Images/surfeng.jpg')} style={{width:90,height:70,borderRadius:10,marginRight:5}}/>
+          <View style={{alignItems:'flex-start',Top:-10}}> 
+            <Title style={{color:"#7BB062"}}>
+                Survey
+            </Title>
+            <Subtitle style={{color:"#000" , paddingLeft : 20}}>
+              Engineering
+            </Subtitle>
+          </View>
+        </Left>
+         <Right>
+         <View >
+          <TouchableOpacity  onPress={() => this.props.navigation.navigate('Survey')} >
+        
+           <Icon name="arrow-right" size={25} color='#7BB062' style={{marginTop:12}} />
+        
+        
+          </TouchableOpacity>
+          </View>
+         </Right>
+         </CardItem>
+         </Card>  
          <Card> 
          <CardItem style={{backgroundColor:"#fff" }}>
         <Left style>

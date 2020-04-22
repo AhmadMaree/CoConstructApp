@@ -3,6 +3,7 @@ import Checkbox from 'react-native-custom-checkbox';
 import RNPickerSelect from 'react-native-picker-select';
 import PushNotification from "react-native-push-notification";
 import { Item, Input, Label } from 'native-base';
+import IP from './Ip';
 import {
   
   StyleSheet,
@@ -138,7 +139,7 @@ export default class Login extends Component {
         if (!(this.state.email=== '' || this.state.pass === ''||this.state.iduser === '')) {
 
             if(this.state.iduser === '0'){
-                let url2 = 'http://192.168.1.106:8088/loginco/'+this.state.iduser+'/'+this.state.email+'/'+this.state.pass;
+                let url2 = 'http://'+IP.ip+':8088/loginco/'+this.state.iduser+'/'+this.state.email+'/'+this.state.pass;
                 const data = new FormData();
                 data.append("iduser",this.state.iduser);
                 data.append("email",this.state.email);
@@ -163,7 +164,7 @@ export default class Login extends Component {
                               ) 
         }else{
 
-            let url2 = 'http://192.168.1.106:8088/loginco/'+this.state.iduser+'/'+this.state.email+'/'+this.state.pass;
+            let url2 = 'http://'+IP.ip+':8088/loginco/'+this.state.iduser+'/'+this.state.email+'/'+this.state.pass;
             const data = new FormData();
             data.append("iduser",this.state.iduser);
             data.append("email",this.state.email);
@@ -197,7 +198,7 @@ export default class Login extends Component {
     }
     else {
         if (!(this.state.email=== '' || this.state.pass === ''||this.state.sec === '')) {
-        let url2 = 'http://192.168.1.106:8088/loginn/'+this.state.email+'/'+this.state.pass+'/'+this.state.sec;
+        let url2 = 'http://'+IP.ip+':8088/loginn/'+this.state.email+'/'+this.state.pass+'/'+this.state.sec;
         const data = new FormData();
        
         data.append("email",this.state.email);

@@ -24,6 +24,9 @@ import Requrmint from './Requrmint';
 import Feedback from './Feedback'
 import ListRow from './ListRow';
 import Work from './Work';
+import Map from './Map';
+import Survey from './Survey';
+
 class Drawer extends Component {
 
 
@@ -177,6 +180,37 @@ class Drawer extends Component {
     },
    
   });
+
+  const eiActivity_StackNavigator = createStackNavigator({
+    //All the screen from the Screen1 will be indexed here
+    Firstt: {
+      screen: Map,
+      navigationOptions: ({ navigation }) => ({
+        title: 'Map',
+        headerLeft: <Drawer navigationProps={navigation} />,
+        headerStyle: {
+          backgroundColor: '#7BB062',
+        },
+        headerTintColor: '#fff',
+      }),
+    },
+   
+  });
+  const ei1Activity_StackNavigator = createStackNavigator({
+    //All the screen from the Screen1 will be indexed here
+    Firsttt: {
+      screen: Survey,
+      navigationOptions: ({ navigation }) => ({
+        headerLeft: <Drawer navigationProps={navigation} />,
+        title: 'Survey Engineering',
+        headerStyle: {
+          backgroundColor: '#7BB062',
+        },
+        headerTintColor: '#fff',
+      }),
+    },
+   
+  });
  
 
   const DrawerNavigator = createDrawerNavigator({
@@ -230,6 +264,20 @@ class Drawer extends Component {
         screen: SevActivity_StackNavigator,
         navigationOptions: {
           drawerLabel: 'Worker ',
+        },
+      },
+      Map: {
+        //Title
+        screen: eiActivity_StackNavigator,
+        navigationOptions: {
+          drawerLabel: 'Map For Office Eng ',
+        },
+      },
+      Survey: {
+        //Title
+        screen: ei1Activity_StackNavigator,
+        navigationOptions: {
+          
         },
       },
 

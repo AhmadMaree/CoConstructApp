@@ -48,7 +48,7 @@ export default class DeleteOffice extends Component {
   onRegister = EN => {
 
     this.state.EN1=EN;
-    let  url = 'http://192.168.1.103:8088/delete1/'+this.state.EN1;
+    let  url = 'http://192.168.1.107:8088/delete1/'+this.state.EN1;
     Alert.alert ('Alert',
                   'Are you Sure you want to delete ?',
                   [
@@ -93,31 +93,37 @@ export default class DeleteOffice extends Component {
 
 
   renderItem = ({ item ,index}) => {
-
-      this.state.ON=item.ON;
-      const state=this.state
-      this.state.tableData = [
-      [<Text style={{fontFamily :'Bellota-Bold',fontSize:20,color:"#7BB062", padding:50}}>{index}</Text>,
-      <Text style={{fontFamily :'Bellota-Bold' , fontSize : 20  }}>{this.state.ON}</Text>,
+    const {NA}=item.ON;
+    this.state.ON=item.ON;
+    const state=this.state
+    this.state.tableData = [
+    [<Text style={{fontFamily :'Bellota-Bold',fontSize:20,color:"#7BB062", padding:50}}>{index}</Text>,
+    <Text style={{fontFamily :'Bellota-Bold' , fontSize : 20  }}>{this.state.ON}</Text>,
+      <View> 
       <TouchableOpacity onPress={() => this.onRegister(item.EN)} style={styles.buttonlogin}>
-        <Text style={styles.buttnTextlogin}>Delete</Text>
-        </TouchableOpacity>],
-        ]
-       
-       
-        
-    return (
-           <View style={styles.container}>
-           <Table style={{marginVertical:-16.5}} borderStyle={{borderWidth: 1, borderColor: '#000'}}>
-           <Rows  style={{height:80,backgroundColor: '#D9D9DB'}} data={state.tableData} textStyle={styles.text1}/>
-           </Table>
-           </View>
-     )
-     }
+      <Text style={styles.buttnTextlogin}>Delete</Text>
+      </TouchableOpacity> 
+      <TouchableOpacity onPress={() => this.props.navigation.navigate('Updateoffice',{Enginner:item.EN,photo:item.photo})} style={styles.buttonlogin1}>
+      <Text style={styles.buttnTextlogin}>UPDATE</Text>
+      </TouchableOpacity> 
+      </View>
+      ],
+      ]
+     
+     
+      
+  return (
+         <View style={styles.container}>
+         <Table style={{marginVertical:-16.5}} borderStyle={{borderWidth: 1, borderColor: '#000'}}>
+         <Rows  style={{height:160,backgroundColor: '#D9D9DB'}} data={state.tableData} textStyle={styles.text1}/>
+         </Table>
+         </View>
+   )
+   }
 
   componentDidMount() {
 
-    fetch("http://192.168.1.103:8088/get_show_Office/").then(results=>results.json())
+    fetch("http://192.168.1.107:8088/get_show_Office/").then(results=>results.json())
     .then(results=>this.setState({'item':results.response,'len':results.length}));
    
   }
@@ -196,8 +202,18 @@ const styles = StyleSheet.create({
     width : 100,
     backgroundColor : '#7BB062',
     borderRadius : 25 , 
-    marginVertical : -40,
-    paddingVertical : 16,
+    marginVertical : -10,
+    paddingVertical : 17,
+    marginLeft:10
+    
+  } ,
+
+  buttonlogin1 : {
+    width : 100,
+    backgroundColor : '#7BB062',
+    borderRadius : 25 , 
+    marginVertical : 15,
+    paddingVertical :16,
     marginLeft:10
     
   } ,

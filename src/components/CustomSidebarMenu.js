@@ -37,6 +37,11 @@ import { ScrollView } from 'react-native-gesture-handler';
           screenToNavigate: 'First2',
         },
         {
+          navOptionThumb: 'map-marker',
+          navOptionName: 'Maps',
+          screenToNavigate: 'Firstt',
+        },
+        {
           navOptionThumb: 'sign-out',
           navOptionName: 'Logout',
          screenToNavigate: 'Login',
@@ -49,7 +54,7 @@ import { ScrollView } from 'react-native-gesture-handler';
     componentDidMount(){
       const { Email } = this.props.navigation.state.params;
       this.state.email = Email;
-        let url = "http://192.168.1.106:8088/get_all_Profile/"+this.state.email ;
+        let url = "http://192.168.1.107:8088/get_all_Profile/"+this.state.email ;
         fetch(url).then(results=>results.json())
         .then(results=>this.setState({'allData':results.response}));
     }
@@ -59,7 +64,7 @@ import { ScrollView } from 'react-native-gesture-handler';
       const { Email } = this.props.navigation.state.params;
       this.state.email = Email;
       this.state.allData.forEach((item)=>{
-        this.state.avatarSource = encodeURI("http://192.168.1.106:8088/load_image1?img=" + `${item.photo}`);
+        this.state.avatarSource = encodeURI("http://192.168.1.107:8088/load_image1?img=" + `${item.photo}`);
         this.state.username = `${item.username}` ;
     });
       return (

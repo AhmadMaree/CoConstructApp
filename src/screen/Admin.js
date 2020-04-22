@@ -108,23 +108,14 @@ export default class Admin extends Component{
             Insert
             </Icon.Button>
             </View>
-            <View style={{marginTop : 4}}>
-            <Icon.Button
-             name="arrow-right"
-             backgroundColor="#455a64"
-             onPress={()=> this.props.navigation.navigate('DeleteOffice')}
-             >
-            Update
-            </Icon.Button>
-           </View>
            <View style={{marginTop :4}}>
             <Icon.Button
              name="arrow-right"
              backgroundColor="#455a64"
-             style={{paddingLeft :14 , paddingRight : 8}}
+             style={{paddingLeft :14 , paddingRight : 5}}
              onPress={()=> this.props.navigation.navigate('DeleteOffice')}
              >
-             Delete
+             Modify
             </Icon.Button>
             </View>
            </Right>
@@ -149,30 +140,20 @@ export default class Admin extends Component{
            <Icon.Button
              name="arrow-right"
              backgroundColor="#455a64"
-             style={{paddingLeft :16 , paddingRight : 16}}
+             style={{paddingLeft :16 , paddingRight : 10}}
              onPress={()=> this.props.navigation.navigate('AddWorker')}
              >
-          EDIT
+          Insert
             </Icon.Button>
             </View>
             <View style={{marginTop :4}}>
             <Icon.Button
              name="arrow-right"
              backgroundColor="#455a64"
-             
-             onPress={()=> this.props.navigation.navigate('AddWorker')}
-             >
-          Update
-            </Icon.Button>
-            </View>
-            <View style={{marginTop :4}}>
-            <Icon.Button
-             name="arrow-right"
-             backgroundColor="#455a64"
-             style={{paddingLeft :14 , paddingRight : 8}}
+             style={{paddingLeft :14 , paddingRight : 5}}
              onPress={()=> this.props.navigation.navigate('DeleteWorker')}
              >
-          Delete
+           Modify
             </Icon.Button>
             </View>
            </Right>

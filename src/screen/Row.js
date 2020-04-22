@@ -23,6 +23,7 @@ import {
   import Icon from "react-native-vector-icons/Entypo";
   import ProfileCard from './ProfileCard';
 import { Button } from 'react-native-paper';
+import IP from './Ip';
 
 // Enable LayoutAnimation on Android
 if (UIManager.setLayoutAnimationEnabledExperimental) {
@@ -96,15 +97,17 @@ export default class Row extends Component {
       <View style={styles.container1}>
 
       <View style={styles.leftPane}>
-      <Image source={{ uri: encodeURI("http://192.168.1.106:8088/load_image1?img=" + this.props.photo)}} style={{width : "100%" , height : "100%", flex:1}} />
+      <Image source={{ uri: encodeURI('http://'+IP.ip+':8088/load_image1?img=' + this.props.photo)}} style={{width : "100%" , height : "100%", flex:1}} />
     
       </View>
   
       <View style={styles.rightPane}>
         <View style={{ flex: 1, flexDirection: 'column' }}>
         <Text  style={{fontFamily :'Bellota-Bold'}}>{this.props.ON}</Text>
-        <Text  style={{fontFamily :'Bellota-Light'}} >Architect:{this.props.EN}</Text>
+     
+        <Text  style={{fontFamily :'Bellota-Light'}} >Arthitect:{this.props.EN}</Text>
         </View>
+        
         <View style={{alignContent :'center' , marginBottom : 5 , padding : 10 , width:45}}>
         <StarRating
                           disabled={false}
@@ -268,7 +271,7 @@ leftPane: {
 },
 rightPane: {
   flex: 2,
-  padding: 16,
+  padding: 13,
   backgroundColor: '#D4D9D9',
 },
 buttonlogin : {

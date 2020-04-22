@@ -3,6 +3,7 @@ import { StyleSheet, View,Text,Button,TextInput,TouchableOpacity  , AsyncStorage
 import { Table, Row, Rows } from 'react-native-table-component';
 import Checkbox from 'react-native-custom-checkbox';
 import RNPickerSelect from 'react-native-picker-select';
+import IP from './Ip';
 
 /*tableData: [
     ['1', '2', '3', '4'],
@@ -83,7 +84,7 @@ export default class Booking extends Component {
   
   if (!(this.state.name=== '' || this.state.addd === '' || this.state.tel === '' || this.state.idd === '')) {
 
-  let url2 = 'http://192.168.1.106:8088/Sendtooffice/'+this.state.emailuser+'/'+this.state.name+'/'+this.state.idd+'/'+this.state.tel+'/'+this.state.addd+'/'+this.state.checked1;
+  let url2 = 'http://'+IP.ip+':8088/Sendtooffice/'+this.state.emailuser+'/'+this.state.name+'/'+this.state.idd+'/'+this.state.tel+'/'+this.state.addd+'/'+this.state.checked1;
   const data = new FormData();
  
   data.append("name",this.state.name);
@@ -113,7 +114,7 @@ export default class Booking extends Component {
 
 
  
-  let url2 = 'http://192.168.1.106:8088/inserttoken/'+this.state.emailuser;
+  let url2 = 'http://'+IP.ip+':8088/inserttoken/'+this.state.emailuser;
                 const data = new FormData();
                  data.append("token",this.state.Token)
                  fetch(url2, { method: 'post', body:data})

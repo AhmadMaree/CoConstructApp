@@ -26,8 +26,8 @@ import DeleteOffice from './DeleteOffice';
 import DeleteWorker from './DeleteWorker';
 import SendNotification from './sendNotification';
 import ReceiveNotification from './receiveNotification';
-
-
+import  Updateoffice from './UpdateOffice';
+import UpdatePageWorker from './UpdatePageWorker';
 
 
 const AuthStackAdmin = createStackNavigator({
@@ -73,7 +73,7 @@ const AuthStackAdmin = createStackNavigator({
     DeleteOffice :{
         screen : DeleteOffice ,
         navigationOptions:{
-            title : 'Delete Office',
+            title : 'Modify Office',
             headerStyle : {
                 backgroundColor : '#7BB062',
             },
@@ -83,7 +83,27 @@ const AuthStackAdmin = createStackNavigator({
     DeleteWorker :{
         screen : DeleteWorker ,
         navigationOptions:{
-            title : 'Delete Worker',
+            title : 'Modify Worker',
+            headerStyle : {
+                backgroundColor : '#7BB062',
+            },
+            headerTintColor : '#fff',
+        }
+    },
+    Updateoffice :{
+        screen : Updateoffice ,
+        navigationOptions:{
+            title : 'Update Office',
+            headerStyle : {
+                backgroundColor : '#7BB062',
+            },
+            headerTintColor : '#fff',
+        }
+    },
+    UpdatePageWorker :{
+        screen : UpdatePageWorker ,
+        navigationOptions:{
+            title : 'Update Worker',
             headerStyle : {
                 backgroundColor : '#7BB062',
             },
@@ -203,6 +223,7 @@ const AuthStackAdmin = createStackNavigator({
                 header: null
             },
         },
+        
     
   });
 

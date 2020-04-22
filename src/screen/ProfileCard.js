@@ -15,7 +15,8 @@ import FoldView from 'react-native-foldview';
 
 import ProfileDetailCard from './ProfileDetailCard';
 import AdditionalInfoCard from './AdditionalInfoCard';
-import SendSMS from 'react-native-sms'
+import SendSMS from 'react-native-sms';
+import IP from './Ip';
 
 export default class Row extends Component {
   constructor(props) {

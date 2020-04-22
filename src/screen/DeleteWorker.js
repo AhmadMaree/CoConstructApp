@@ -38,7 +38,7 @@ export default class DeleteWorker extends Component {
 
   componentDidMount() {
 
-    fetch("http://192.168.1.103:8088/get_show_Worker/").then(results=>results.json())
+    fetch("http://192.168.1.108:8088/get_show_Worker/").then(results=>results.json())
     .then(results=>this.setState({'item':results.response,'len':results.length}));
    
   }
@@ -76,7 +76,7 @@ export default class DeleteWorker extends Component {
                     {text :'No', onPress : () =>  alert('Canceled'),style:'cancel'},
                     {text: 'Yes' ,onPress :() => {
 
-                        let  url = 'http://192.168.1.103:8088/delete2/'+item.adr;
+                        let  url = 'http://192.168.1.108:8088/delete2/'+item.adr;
                         const data = new FormData();
                         data.append("flag",item.adr);
 
@@ -103,8 +103,14 @@ export default class DeleteWorker extends Component {
                     ])
                           },
                         text : 'Delete' , type : 'delete'
+                    },
+                    {
+                      onPress : () => {this.props.navigation.navigate('UpdatePageWorker',{tel : item.tel , photo:item.photoname})},
+                      text : 'Update' , type :'secondary' , backgroundColor:'#7BB062'
+
                     }
             ],
+      
             rowID : index , sectionID :1 ,
       };
   
@@ -119,7 +125,7 @@ export default class DeleteWorker extends Component {
            <Left style>
            
              <Thumbnail
-             source={{uri:encodeURI("http://192.168.1.103:8088/load_image1?img=" + item.photoname)}} style={{width:120,height:70,borderRadius:10,marginRight:5}}/>
+             source={{uri:encodeURI("http://192.168.1.108:8088/load_image1?img=" + item.photoname)}} style={{width:120,height:70,borderRadius:10,marginRight:5}}/>
              
              <View style={{alignItems:'flex-start',Top:20}}> 
                <Title style={{color:"#000"}}>
@@ -160,7 +166,7 @@ export default class DeleteWorker extends Component {
           <View>
           <Text style={{marginTop:50,fontSize:20,fontFamily:'Bellota-Italic'}}>         These all Worker you have. </Text>
           <Text style={{fontSize:20,fontFamily:'Bellota-Italic'}}>         In order to Delete any Worker   </Text>
-          <Text style={{marginBottom:50,fontSize:18,fontFamily:'Bellota-Italic'}}>   please Swipe to Left and then press on delete </Text>        
+          <Text style={{marginBottom:50,fontSize:18,fontFamily:'Bellota-Italic'}}>   please Swipe to Left and then press on  </Text>        
           </View>
 
         <FlatList
