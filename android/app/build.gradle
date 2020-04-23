@@ -134,6 +134,10 @@ android {
         versionCode 1
         versionName "1.0"
     }
+    packagingOptions {
+		exclude 'META-INF/mimetypes.default'
+		exclude 'META-INF/mailcap.default'
+	}
     splits {
         abi {
             reset()

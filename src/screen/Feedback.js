@@ -16,6 +16,7 @@ import {
 
   import {ButtonGroup} from 'react-native-elements'
   import Textarea from 'react-native-textarea';
+   import IP from './Ip';
 
 
 export default class Feedback extends Component {
@@ -38,7 +39,7 @@ export default class Feedback extends Component {
   addData=()=>{
     if (!(this.state.title=== '' || this.state.message=== ''||this.state.selectedIndex === null)) {
 
-        let url2 = 'http://192.168.1.107:8088/Feedback/'+this.state.email+'/'+this.state.selectedIndex+'/'+this.state.title+'/'+this.state.message;
+        let url2 = 'http://'+IP.ip+':8088/Feedback/'+this.state.email+'/'+this.state.selectedIndex+'/'+this.state.title+'/'+this.state.message;
         const data = new FormData();
        
         data.append("email",this.state.email);

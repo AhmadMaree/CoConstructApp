@@ -14,7 +14,7 @@ import {
     ToastAndroid,
   
 } from "react-native";
-
+import IP from './Ip';
 
 
 //import {Container,Header,Body,Checkbox,Title,Card,CardItem,Left,Right,Content,Grid,Col,Text,Button, Thumbnail, Subtitle}from 'native-base'
@@ -62,7 +62,7 @@ export default class Changepassword extends Component{
   onRegister = () => {
     if (!(this.state.newpass=== '' || this.state.oldpass === '' || this.state.conpass === '')) {
 
-  let url2 = 'http://192.168.1.107:8088/ChangePassword/'+this.state.email+'/'+this.state.oldpass+'/'+this.state.newpass;
+  let url2 = 'http://'+IP.ip+':8088/ChangePassword/'+this.state.email+'/'+this.state.oldpass+'/'+this.state.newpass;
   //var imageName = this.state.imageName;
    const data = new FormData();
   //data.append("file", this.state.data); 

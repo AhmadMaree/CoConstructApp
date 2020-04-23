@@ -14,6 +14,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 
 import {Container,Header,Body,Checkbox,Title,Card,CardItem,Left,Right,Content,Grid,Col,Text,Button, Thumbnail, Subtitle}from 'native-base'
+import Ip from './Ip';
 
 export default class InsertAdmin  extends Component{
 
@@ -51,7 +52,7 @@ export default class InsertAdmin  extends Component{
 */
 
 
-  let url2 = 'http://192.168.1.104:8088/Insert/'+this.state.name+'/'+this.state.salary+'/'+this.state.phonenum+'/'+this.state.email;
+  let url2 = 'http://'+Ip.ip+':8088/Insert/'+this.state.name+'/'+this.state.salary+'/'+this.state.phonenum+'/'+this.state.email;
   //var imageName = this.state.imageName;
    const data = new FormData();
   //data.append("file", this.state.data); 

@@ -15,7 +15,8 @@ import {
   ToastAndroid,
   BackHandler,
   Alert,
-  AsyncStorage
+  AsyncStorage,
+  Button
 } from 'react-native';
 
 
@@ -289,6 +290,11 @@ export default class Login extends Component {
                 <TouchableOpacity onPress={() => this.props.navigation.navigate('singup')}><Text style={formStyles.textsignup1}>signup</Text></TouchableOpacity>
 
              </View>
+             <View style={formStyles.signupstyle1}>
+                <TouchableOpacity onPress={() => this.props.navigation.navigate('Forgot')}><Text style={formStyles.textsignup1}>Forgot Password?</Text></TouchableOpacity>
+
+             </View>
+             
         </View>
 
         
@@ -320,10 +326,17 @@ const formStyles = StyleSheet.create({
         flexGrow: 1,
         alignItems :  'flex-end',
         justifyContent: 'center',
-        paddingVertical : 16 ,
+        paddingVertical : 5 ,
         flexDirection :'row'
         
     },
+    signupstyle1 : {
+      marginBottom :15,
+      alignItems :  'flex-end',
+      justifyContent: 'center',
+      paddingVertical : 4 ,
+      
+  },
     textsignup : {
         color : 'rgba(255,255,255,0.6)',
         fontSize : 16 

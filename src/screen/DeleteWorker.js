@@ -20,6 +20,7 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {Container,Header,Body,Checkbox,Title,Card,CardItem,Left,Right,Content,Grid,Col, Thumbnail, Subtitle}from 'native-base'
 import Swipeout from 'react-native-swipeout';
+import Ip from './Ip';
 
 export default class DeleteWorker extends Component {
 
@@ -38,7 +39,7 @@ export default class DeleteWorker extends Component {
 
   componentDidMount() {
 
-    fetch("http://192.168.1.108:8088/get_show_Worker/").then(results=>results.json())
+    fetch('http://'+IP.ip+':8088/get_show_Worker/').then(results=>results.json())
     .then(results=>this.setState({'item':results.response,'len':results.length}));
    
   }
@@ -76,7 +77,7 @@ export default class DeleteWorker extends Component {
                     {text :'No', onPress : () =>  alert('Canceled'),style:'cancel'},
                     {text: 'Yes' ,onPress :() => {
 
-                        let  url = 'http://192.168.1.108:8088/delete2/'+item.adr;
+                        let  url = 'http://'+Ip.ip+':8088/delete2/'+item.adr;
                         const data = new FormData();
                         data.append("flag",item.adr);
 
@@ -125,7 +126,7 @@ export default class DeleteWorker extends Component {
            <Left style>
            
              <Thumbnail
-             source={{uri:encodeURI("http://192.168.1.108:8088/load_image1?img=" + item.photoname)}} style={{width:120,height:70,borderRadius:10,marginRight:5}}/>
+             source={{uri:encodeURI('http://'+IP.ip+':8088/load_image1?img=' + item.photoname)}} style={{width:120,height:70,borderRadius:10,marginRight:5}}/>
              
              <View style={{alignItems:'flex-start',Top:20}}> 
                <Title style={{color:"#000"}}>

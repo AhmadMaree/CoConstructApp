@@ -22,8 +22,8 @@ import {
   import FoldView from 'react-native-foldview';
   import Icon from "react-native-vector-icons/Entypo";
   import ProfileCard from './ProfileCard';
-import { Button } from 'react-native-paper';
-import IP from './Ip';
+  import { Button } from 'react-native-paper';
+  import IP from './Ip';
 
 // Enable LayoutAnimation on Android
 if (UIManager.setLayoutAnimationEnabledExperimental) {
@@ -108,7 +108,7 @@ export default class Row extends Component {
         <Text  style={{fontFamily :'Bellota-Light'}} >Arthitect:{this.props.EN}</Text>
         </View>
         
-        <View style={{alignContent :'center' , marginBottom : 5 , padding : 10 , width:45}}>
+        <View style={{alignContent :'center' , marginBottom : 5 , padding : 10 ,marginTop:7, width:45}}>
         <StarRating
                           disabled={false}
                           maxStars={5}

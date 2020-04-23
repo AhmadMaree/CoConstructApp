@@ -28,7 +28,7 @@ import SendNotification from './sendNotification';
 import ReceiveNotification from './receiveNotification';
 import  Updateoffice from './UpdateOffice';
 import UpdatePageWorker from './UpdatePageWorker';
-
+import Forgot from './ForgotPassword';
 
 const AuthStackAdmin = createStackNavigator({
     Splash: {
@@ -110,6 +110,16 @@ const AuthStackAdmin = createStackNavigator({
             headerTintColor : '#fff',
         }
     },
+    Forgot :{
+        screen : Forgot ,  
+        navigationOptions:{
+            title : 'ForgotPassWord',
+            headerStyle : {
+                backgroundColor : '#7BB062',
+            },
+            headerTintColor : '#fff',
+        }
+    }
     
 
   });
@@ -163,6 +173,16 @@ const AuthStackAdmin = createStackNavigator({
             header: null
         },
     },
+    Forgot :{
+        screen : Forgot ,  
+        navigationOptions:{
+            title : 'ForgotPassWord',
+            headerStyle : {
+                backgroundColor : '#7BB062',
+            },
+            headerTintColor : '#fff',
+        }
+    }
 
     
 
@@ -223,6 +243,16 @@ const AuthStackAdmin = createStackNavigator({
                 header: null
             },
         },
+        Forgot :{
+            screen : Forgot ,  
+            navigationOptions:{
+                title : 'ForgotPassWord',
+                headerStyle : {
+                    backgroundColor : '#7BB062',
+                },
+                headerTintColor : '#fff',
+            }
+        }
         
     
   });
@@ -281,6 +311,16 @@ const AppNavigator = createStackNavigator({
     ReceiveNotification :{
         screen : ReceiveNotification ,  
     },
+    Forgot :{
+        screen : Forgot ,  
+        navigationOptions:{
+            title : 'ForgotPassWord',
+            headerStyle : {
+                backgroundColor : '#7BB062',
+            },
+            headerTintColor : '#fff',
+        }
+    }
 
 },
   {

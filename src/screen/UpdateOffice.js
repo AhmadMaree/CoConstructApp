@@ -19,6 +19,7 @@ import {
 } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import ImagePicker from 'react-native-image-picker';
+import Ip from './Ip';
 
   export default class Updateoffice extends Component {
 
@@ -57,7 +58,7 @@ import ImagePicker from 'react-native-image-picker';
           const {Enginner} = this.props.navigation.state.params;
           this.state.onn=Enginner;
         console.log(this.state.onn)
-         fetch("http://192.168.1.107:8088/get_show_Office1/"+this.state.onn).then(results=>results.json())
+         fetch('http://'+Ip.ip+':8088/get_show_Office1/'+this.state.onn).then(results=>results.json())
         .then(results=>this.setState({'item':results.response,'len':results.length}));
         // const filteredData = this.state.item.filter(item => item.ON !== this.state.Onn);
          //this.setState({ item: filteredData });
@@ -107,7 +108,7 @@ import ImagePicker from 'react-native-image-picker';
         if(this.state.sel === '1'){
             if (!(this.state.ON=== '' || this.state.EN=== ''||this.state.PN === ''||this.state.EM === ''||this.state.FA === ''||this.state.TE === ''||this.state.AD === '')) {
       
-                let url2 = 'http://192.168.1.107:8088/Updateoffice111/'+this.state.EN;
+                let url2 = 'http://'+Ip.ip+':8088/Updateoffice111/'+this.state.EN;
                 //var imageName = this.state.imageName;
                  const data = new FormData();
                  data.append("file", this.state.data); 
@@ -140,7 +141,7 @@ import ImagePicker from 'react-native-image-picker';
            
         if (!(this.state.ON=== '' || this.state.EN=== ''||this.state.PN === ''||this.state.EM === ''||this.state.FA === ''||this.state.TE === ''||this.state.AD === '')) {
       
-        let url2 = 'http://192.168.1.107:8088/Updateoffice11/'+this.state.EN;
+        let url2 = 'http://'+Ip.ip+':8088/Updateoffice11/'+this.state.EN;
         //var imageName = this.state.imageName;
          const data = new FormData();
         data.append("ON",this.state.ON);
@@ -270,7 +271,7 @@ render() {
     const {photo} = this.props.navigation.state.params;
     this.state.photo=photo;
     if(this.state.photo != ""){
-    this.state.avatarSource = encodeURI("http://192.168.1.107:8088/load_image1?img=" + `${this.state.photo}`)
+    this.state.avatarSource = encodeURI('http://'+Ip.ip+':8088/load_image1?img=' + `${this.state.photo}`)
     }
   return (
     <View style={Styles.connt}>

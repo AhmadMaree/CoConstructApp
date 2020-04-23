@@ -20,6 +20,7 @@ import { SearchBar } from 'react-native-elements';
 import {Container,Header,Body,Checkbox,Title,Card,CardItem,Left,Right,Content,Grid,Col, Thumbnail, Subtitle}from 'native-base'
 import SendSMS from 'react-native-sms'
 import Communications from 'react-native-communications';
+import Ip from './Ip';
 
  /*  <Image style={{width:100,height:100,margin:5}}
           source={require('../Images/logo1.png')} />
@@ -78,7 +79,7 @@ export default class Work extends Component {
         <CardItem style={{backgroundColor:"#efefef",height:120}}>
           <Left style>
             <Thumbnail
-            source={{uri:encodeURI("http://192.168.1.106:8088/load_image1?img=" + item.photoname)}} style={{width:120,height:70,borderRadius:10,marginRight:5}}/>
+            source={{uri:encodeURI('http://'+Ip.ip+':8088/load_image1?img=' + item.photoname)}} style={{width:120,height:70,borderRadius:10,marginRight:5}}/>
             <View style={{alignItems:'flex-start',Top:20}}> 
               <Title style={{color:"#000"}}>
               <Text style={{fontFamily :'Bellota-Bold'}}>Name:{item.name}</Text>
@@ -111,7 +112,7 @@ export default class Work extends Component {
 
   componentDidMount() {
 
-    fetch("http://192.168.1.106:8088/get_all_Worker/").then(results=>results.json())
+    fetch('http://'+Ip.ip+':8088/get_all_Worker/').then(results=>results.json())
     .then(results=>this.setState({'item':results.response,'len':results.length,'item1':results.response}));
 
   

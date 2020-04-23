@@ -18,6 +18,7 @@ import {
 } from "react-native";
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {Container,Header,Body,Checkbox,Title,Card,CardItem,Left,Right,Content,Grid,Col, Thumbnail, Subtitle}from 'native-base'
+import Ip from './Ip';
 
 export default class Show extends Component {
 
@@ -49,7 +50,7 @@ export default class Show extends Component {
   toggle = idd => {
     
     
-    let url2 = 'http://192.168.1.106:8088/insertaccess/'+this.state.flag1+'/'+idd;
+    let url2 = 'http://'+Ip.ip+':8088/insertaccess/'+this.state.flag1+'/'+idd;
     const data = new FormData();
     data.append("flag",this.state.flag1);
     data.append("ide",this.state.ide);
@@ -72,7 +73,7 @@ export default class Show extends Component {
     
    
     
-    let url2 = 'http://192.168.1.106:8088/insertaccess/'+this.state.flag+'/'+idd;
+    let url2 = 'http://'+Ip.ip+':8088/insertaccess/'+this.state.flag+'/'+idd;
     const data = new FormData();
     data.append("flag",this.state.flag);
     data.append("ide",this.state.ide);
@@ -144,7 +145,7 @@ export default class Show extends Component {
 
   componentDidMount() {
 
-    fetch("http://192.168.1.106:8088/get_show/").then(results=>results.json())
+    fetch('http://'+Ip.ip+':8088/get_show/').then(results=>results.json())
     .then(results=>this.setState({'item':results.response,'len':results.length}));
    
   }

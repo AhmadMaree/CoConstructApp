@@ -19,6 +19,7 @@ import {
 } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import ImagePicker from 'react-native-image-picker';
+import Ip from './Ip';
 
 
 export default class UpdatePageWorker extends Component {
@@ -46,7 +47,7 @@ export default class UpdatePageWorker extends Component {
       componentDidMount() {
           const {tel} = this.props.navigation.state.params;
           this.state.tel=tel;
-         fetch("http://192.168.1.105:8088/get_show_WOrker1/"+this.state.tel).then(results=>results.json())
+         fetch('http://'+Ip.ip+':8088/get_show_WOrker1/'+this.state.tel).then(results=>results.json())
         .then(results=>this.setState({'item':results.response,'len':results.length}));
        }
 
@@ -93,7 +94,7 @@ export default class UpdatePageWorker extends Component {
         if(this.state.sel === '1'){
             if (!(this.state.tel === '' || this.state.Name === ''||this.state.Mobile === ''||this.state.field === '')) {
       
-                let url2 = 'http://192.168.1.105:8088/UpdateWorker111/'+this.state.tel;
+                let url2 = 'http://'+Ip.ip+':8088/UpdateWorker111/'+this.state.tel;
                 //var imageName = this.state.imageName;
                  const data = new FormData();
                  data.append("file", this.state.data); 
@@ -122,7 +123,7 @@ export default class UpdatePageWorker extends Component {
            
         if (!(this.state.tel === '' || this.state.Name === ''||this.state.Mobile === ''||this.state.field === '')) {
       
-        let url2 = 'http://192.168.1.105:8088/UpdateWorker11/'+this.state.tel;
+        let url2 = 'http://'+Ip.ip+':8088/UpdateWorker11/'+this.state.tel;
         //var imageName = this.state.imageName;
          const data = new FormData();
         data.append("field",this.state.field);
@@ -200,7 +201,7 @@ render() {
     const {photo} = this.props.navigation.state.params;
     this.state.photo=photo;
     if(this.state.photo != ""){
-    this.state.avatarSource = encodeURI("http://192.168.1.105:8088/load_image1?img=" + `${this.state.photo}`)
+    this.state.avatarSource = encodeURI('http://'+Ip.ip+':8088/load_image1?img=' + `${this.state.photo}`)
     }
   return (
     <View style={Styles.connt}>

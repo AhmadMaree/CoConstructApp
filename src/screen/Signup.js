@@ -17,6 +17,7 @@ import {
   ToastAndroid,
 } from 'react-native';
 import Logo from '../components/Logo';
+import Ip from './Ip';
 
 export default class Signup extends Component {
 
@@ -360,7 +361,7 @@ export default class Signup extends Component {
       this.state.Name === '' || this.state.Email === '' ||
       this.state.Pass === '' || this.state.CPass === ''|| this.state.iduser === '')) {
 
-        let url2 = 'http://192.168.1.103:8088/Insertsingup/'+this.state.iduser+'/'+this.state.Name+'/'+this.state.Email+'/'+this.state.Pass;
+        let url2 = 'http://'+Ip.ip+':8088/Insertsingup/'+this.state.iduser+'/'+this.state.Name+'/'+this.state.Email+'/'+this.state.Pass;
           const data = new FormData();
          data.append("username",this.state.Name);
          data.append("email",this.state.Email);

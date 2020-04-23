@@ -19,6 +19,7 @@ import {
 } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import ImagePicker from 'react-native-image-picker';
+import Ip from './Ip';
 
   export default class Officeadd extends Component {
 
@@ -75,7 +76,7 @@ import ImagePicker from 'react-native-image-picker';
       
         if (!(this.state.ON=== '' || this.state.EN=== ''||this.state.PN === ''||this.state.EM === ''||this.state.FA === ''||this.state.TE === ''||this.state.AD === '')) {
       
-        let url2 = 'http://192.168.1.107:8088/Insertoffice/'+this.state.ON+'/'+this.state.EN+'/'+this.state.PN+'/'+this.state.EM+'/'+this.state.FA+'/'+this.state.TE+'/'+this.state.AD;
+        let url2 = 'http://'+Ip.ip+':8088/Insertoffice/'+this.state.ON+'/'+this.state.EN+'/'+this.state.PN+'/'+this.state.EM+'/'+this.state.FA+'/'+this.state.TE+'/'+this.state.AD;
         //var imageName = this.state.imageName;
          const data = new FormData();
         //data.append("file", this.state.data); 

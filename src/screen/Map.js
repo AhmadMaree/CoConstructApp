@@ -21,7 +21,7 @@ export default class Playground extends Component{
     state={
         markers:[],
     coordinates:[
-        {name: 'Nafe', latitude:32.225,longitude: 35.2300140399,image:require('../Images/feedback.jpg')},
+        {name: 'Matian and Khatib Engineering', latitude:31.89964,longitude: 35.20422,image:require('../Images/bd1.jpg')},
         {name: 'Kalbouneh Engineering Office', latitude:32.23999889,longitude: 35.5100140399,image:require('../Images/office1.jpg')},
         {name: 'Thika Engineering office', latitude:32.462421,longitude: 35.296851,image:require('../Images/bd.jpg')},
     ]

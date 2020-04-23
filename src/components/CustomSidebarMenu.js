@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, StyleSheet, Image, Text, ImageBackground , AsyncStorage } from 'react-native';
 import Icon from "react-native-vector-icons/FontAwesome";
 import { ScrollView } from 'react-native-gesture-handler';
+import Ip from '../screen/Ip';
 
 
 
@@ -54,7 +55,7 @@ import { ScrollView } from 'react-native-gesture-handler';
     componentDidMount(){
       const { Email } = this.props.navigation.state.params;
       this.state.email = Email;
-        let url = "http://192.168.1.107:8088/get_all_Profile/"+this.state.email ;
+        let url = 'http://'+Ip.ip+':8088/get_all_Profile/'+this.state.email ;
         fetch(url).then(results=>results.json())
         .then(results=>this.setState({'allData':results.response}));
     }
@@ -64,7 +65,7 @@ import { ScrollView } from 'react-native-gesture-handler';
       const { Email } = this.props.navigation.state.params;
       this.state.email = Email;
       this.state.allData.forEach((item)=>{
-        this.state.avatarSource = encodeURI("http://192.168.1.107:8088/load_image1?img=" + `${item.photo}`);
+        this.state.avatarSource = encodeURI('http://'+Ip.ip+':8088/load_image1?img=' + `${item.photo}`);
         this.state.username = `${item.username}` ;
     });
       return (

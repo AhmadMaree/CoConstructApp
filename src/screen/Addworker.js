@@ -4,7 +4,7 @@ import { Container, Content,Card,CardItem,Left,Right, Form, Item, Input, Label }
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Icon1 from 'react-native-vector-icons/MaterialIcons';
 import { Colors } from '../Color/Colors';
-
+import IP from './Ip';
 import {
   
   StyleSheet,
@@ -69,7 +69,7 @@ import ImagePicker from 'react-native-image-picker';
 
     if (!(this.state.name=== '' || this.state.tel === ''||this.state.adr === '' ||this.state.avatarSource === null || this.state.field === '')) {
 
-    let url2 = 'http://192.168.1.103:8088/Addwork/'+this.state.name+'/'+this.state.field+'/'+this.state.adr+'/'+this.state.tel;
+    let url2 = 'http://'+IP.ip+':8088/Addwork/'+this.state.name+'/'+this.state.field+'/'+this.state.adr+'/'+this.state.tel;
    // var imageName = this.state.imageName;
     const data = new FormData();
     data.append("file", this.state.data); 

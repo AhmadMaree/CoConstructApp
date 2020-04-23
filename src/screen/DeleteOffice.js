@@ -19,6 +19,7 @@ import {
 } from "react-native";
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {Container,Header,Body,Checkbox,Title,Card,CardItem,Left,Right,Content,Grid,Col, Thumbnail, Subtitle}from 'native-base'
+import IP from './Ip';
 export default class DeleteOffice extends Component {
 
   constructor(props) {
@@ -48,7 +49,7 @@ export default class DeleteOffice extends Component {
   onRegister = EN => {
 
     this.state.EN1=EN;
-    let  url = 'http://192.168.1.107:8088/delete1/'+this.state.EN1;
+    let  url = 'http://'+IP.ip+':8088/delete1/'+this.state.EN1;
     Alert.alert ('Alert',
                   'Are you Sure you want to delete ?',
                   [
@@ -123,7 +124,7 @@ export default class DeleteOffice extends Component {
 
   componentDidMount() {
 
-    fetch("http://192.168.1.107:8088/get_show_Office/").then(results=>results.json())
+    fetch('http://'+IP.ip+':8088/get_show_Office/').then(results=>results.json())
     .then(results=>this.setState({'item':results.response,'len':results.length}));
    
   }

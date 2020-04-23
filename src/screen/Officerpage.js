@@ -25,6 +25,7 @@ import Svg, {
   } from 'react-native-svg';
   import {Container,Header,Body,Title,Card,CardItem,Left,Right,Content,Grid, Thumbnail, Subtitle}from 'native-base'
 import { ScrollView } from 'react-native-gesture-handler';
+import Ip from './Ip';
 
 const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : 0;
 export default class Officerpage extends Component {
@@ -59,7 +60,7 @@ export default class Officerpage extends Component {
      componentDidMount() {
         BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
        
-        fetch("http://192.168.1.106:8088/get_all_Accpet/").then(results=>results.json())
+        fetch('http://'+Ip.ip+':8088/get_all_Accpet/').then(results=>results.json())
         .then(results=>this.setState({'item':results.response}));
 
         
@@ -67,7 +68,7 @@ export default class Officerpage extends Component {
            
        componentWillUnmount() {
         BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
-        fetch("http://192.168.1.106:8088/get_all_Accpet/").then(results=>results.json())
+        fetch('http://'+Ip.ip+':8088/get_all_Accpet/').then(results=>results.json())
         .then(results=>this.setState({'item':results.response}));
        }
            
