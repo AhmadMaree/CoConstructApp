@@ -26,6 +26,7 @@ import ListRow from './ListRow';
 import Work from './Work';
 import Map from './Map';
 import Survey from './Survey';
+import CatagoryWorker from './CatagoryWorker';
 
 class Drawer extends Component {
 
@@ -211,6 +212,21 @@ class Drawer extends Component {
     },
    
   });
+  const e4Activity_StackNavigator = createStackNavigator({
+    //All the screen from the Screen1 will be indexed here
+    Ca: {
+      screen: CatagoryWorker,
+      navigationOptions: ({ navigation }) => ({
+        headerLeft: <Drawer navigationProps={navigation} />,
+        title: 'Catagory',
+        headerStyle: {
+          backgroundColor: '#7BB062',
+        },
+        headerTintColor: '#fff',
+      }),
+    },
+   
+  });
  
 
   const DrawerNavigator = createDrawerNavigator({
@@ -280,6 +296,13 @@ class Drawer extends Component {
           
         },
       },
+      CatagoryWorker: {
+        //Title
+        screen: e4Activity_StackNavigator,
+        navigationOptions: {
+          drawerLabel: 'Catagory',
+        },
+      }
 
 
   },

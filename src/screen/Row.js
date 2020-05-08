@@ -49,22 +49,77 @@ export default class Row extends Component {
     this.state = {
       expanded: false,
       height: ROW_HEIGHT,
-      generalStarCount: 0,
+      generalStarCount: this.props.suma/this.props.co,
+      sum : 0,
+      sum1 : 0,
+      count : 0,
+      item :[],
     };
   }
 
 /*  */
 
+componentDidMount(){
+  this.fetchFn();
+  console.log(this.state.item)
+}
+
+  fetchFn(){
+    fetch('http://'+IP.ip+':8088/get_rat/'+this.props.EN).then(results=>results.json())
+    .then(results=>this.setState({'item':results.response}));
+  }
+
   onGeneralStarRatingPress(rating) {
     this.setState({
       generalStarCount: rating,
     });
+   
+    this.ratingCompleted(rating)
   }
+  ratingCompleted(rating) {
+    console.log("Rating is: " + rating)
+    console.log(this.state.item)
+    this.state.item.forEach((item)=>{
+      this.state.count=`${item.countra}`;
+      this.state.sum=`${item.sumra}`;
+      console.log(this.state.sum)
+     });
+
+     var sum1;
+     sum1 = parseFloat(this.state.sum)+ parseFloat(rating);
+      sum1= parseFloat(sum1).toFixed(2);
+      
+      this.state.count++;
+     console.log(sum1)
+    let url2 = 'http://'+IP.ip+':8088/rating/'+this.props.EN;
+
+    const data = new FormData();
+    data.append("sum1", sum1); 
+    data.append("count1",this.state.count);
+    data.append("EN",this.props.EN);
+                      fetch(url2 , {method : 'POST' , body : data})
+                      .then(results=>results.json())
+                      .then(json => {if(json.status === 200){
+                        this.setState({
+                          generalStarCount: sum1/this.state.count,
+                          sum : 0,
+                          count:0,
+                        });
+                        sum1 = 0
+                        this.fetchFn()
+                      }
+                     })
+
+                    
+
+  }
+  
   componentWillMount() {
     this.flip = this.flip.bind(this);
     this.handleAnimationStart = this.handleAnimationStart.bind(this);
     this.renderFrontface = this.renderFrontface.bind(this);
     this.renderBackface = this.renderBackface.bind(this);
+    
   }
 
   flip() {
@@ -92,7 +147,6 @@ export default class Row extends Component {
   }
 
   renderFrontface() {
-    
     return (
       <View style={styles.container1}>
 
@@ -122,7 +176,7 @@ export default class Row extends Component {
                           fullStar="ios-star"
                           halfStar="ios-star-half"
                           starSize ={30}
-
+                           
                           />
         </View>
         <View style={{ flexDirection: 'row' }}>
@@ -133,7 +187,7 @@ export default class Row extends Component {
           <View style={{ flex: 1 }}>
             <Text style={{fontFamily : 'Bellota-Bold'}}>Rating</Text>
             <View style={{flexDirection : 'row'}}>
-            <Text style={{fontSize : 20,marginLeft:20}}>{this.state.generalStarCount}/5</Text>
+            <Text style={{fontSize : 20,marginLeft:20}}>{this.state.generalStarCount.toFixed(2)}/5</Text>
             <Icon name={'star'} size={25} color={"#FFEB05"} style={{padding :2}}/>
             </View>
           </View>

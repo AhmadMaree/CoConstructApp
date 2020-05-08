@@ -26,7 +26,7 @@ import {
     stepIndicatorSize: 30,
     currentStepIndicatorSize: 40,
     separatorStrokeWidth: 2,
-    currentStepStrokeWidth: 3,
+    currentStepStrokeWidth: 5,
     stepStrokeCurrentColor: '#7BB062',
     stepStrokeWidth: 3,
     separatorStrokeFinishedWidth: 4,
@@ -69,10 +69,6 @@ import {
         break
       }
       case 3: {
-        iconConfig.name = 'cube-send'
-        break
-      }
-      case 4: {
         iconConfig.name = 'zend'
         break
       }
@@ -214,22 +210,20 @@ import {
        switch (position) {
         case 0: {
          //
-         this.props.navigation.navigate('Profile')
+         this.props.navigation.navigate('ListRow')
           break
         }
         case 1: {
            // 
+           this.props.navigation.navigate('Survey')
           break
         }
         case 2: {
           //
+          this.props.navigation.navigate('CatagoryWorker')
           break
         }
         case 3: {
-        //
-          break
-        }
-        case 4: {
         //
           break
         }
@@ -266,13 +260,13 @@ import {
                 renderStepIndicator={this.renderStepIndicator}
                 customStyles={secondIndicatorStyles}
                 currentPosition={this.state.currentPage}
+                stepCount={4}
                 onPress={this.onStepPress}
                 labels={[
-                    'Buliding permit',
                     'Engineering Office',
-                    'Ahmad',
-                    'Nafe',
-                    'End'
+                    'Survey Engineering',
+                    'Worker',
+                    'END',
                 ]}  
                
               />
@@ -282,29 +276,6 @@ import {
     
               
     <Card>
-      <CardItem style={{backgroundColor:"#fff" }}>
-        <Left style>
-          <Thumbnail
-          source={require('../Images/permit.jpg')} style={{width:90,height:70,borderRadius:10,marginRight:5}}/>
-          <View style={{alignItems:'flex-start',Top:-10}}> 
-            <Title style={{color:"#7BB062"}}>
-                Building
-            </Title>
-            <Subtitle style={{color:"#000" , paddingLeft : 20}}>
-              permit
-            </Subtitle>
-          </View>
-        </Left>
-         <Right >
-         <View >
-          <TouchableOpacity  onPress={() => this.props.navigation.navigate('Requrmint')} >
-             <Icon name="arrow-right" size={25} color='#7BB062' style={{marginTop:12}} />
-          </TouchableOpacity>
-          </View>
-         </Right>
-         </CardItem>
-         </Card> 
-         <Card >
       <CardItem style={{backgroundColor:"#fff" }}>
         <Left style>
           <Thumbnail
@@ -320,11 +291,8 @@ import {
         </Left>
          <Right>
          <View >
-          <TouchableOpacity  onPress={() => this.props.navigation.navigate('ListRow')} >
-        
+          <TouchableOpacity  onPress={() => this.onStepPress(0)} >
            <Icon name="arrow-right" size={25} color='#7BB062' style={{marginTop:12}} />
-        
-        
           </TouchableOpacity>
           </View>
          </Right>
@@ -346,7 +314,7 @@ import {
         </Left>
          <Right>
          <View >
-          <TouchableOpacity  onPress={() => this.props.navigation.navigate('Survey')} >
+          <TouchableOpacity  onPress={() => this.onStepPress(1)} >
         
            <Icon name="arrow-right" size={25} color='#7BB062' style={{marginTop:12}} />
         
@@ -369,7 +337,7 @@ import {
         </Left>
          <Right>
          <View >
-          <TouchableOpacity  onPress={() => this.props.navigation.navigate('Work')} >
+          <TouchableOpacity  onPress={() => this.onStepPress(2)} >
         
            <Icon name="arrow-right" size={25} color='#7BB062' style={{marginTop:12}} />
         

@@ -29,7 +29,13 @@ import ReceiveNotification from './receiveNotification';
 import  Updateoffice from './UpdateOffice';
 import UpdatePageWorker from './UpdatePageWorker';
 import Forgot from './ForgotPassword';
-
+import EditUserName from './EditUserName';
+import AdminFeedBack from './AdminFeedBack';
+import Addsurvey from './Addsurvey';
+import Deletesurvey from './Deletesurvey';
+import Updateser from './Updateser';
+import CatagoryWorker from './CatagoryWorker';
+import Work1 from './Work';
 const AuthStackAdmin = createStackNavigator({
     Splash: {
         screen: Splash,
@@ -119,7 +125,47 @@ const AuthStackAdmin = createStackNavigator({
             },
             headerTintColor : '#fff',
         }
-    }
+    },
+    AdminFeedBack :{
+        screen : AdminFeedBack ,  
+        navigationOptions:{
+            title : 'FeedBack From User',
+            headerStyle : {
+                backgroundColor : '#7BB062',
+            },
+            headerTintColor : '#fff',
+        }
+    },
+    Addsurvey :{
+        screen : Addsurvey ,  
+        navigationOptions:{
+            title : 'Addsurvey',
+            headerStyle : {
+                backgroundColor : '#7BB062',
+            },
+            headerTintColor : '#fff',
+        }
+    },
+    Deletesurvey :{
+        screen : Deletesurvey ,  
+        navigationOptions:{
+            title : 'Deletesurvey',
+            headerStyle : {
+                backgroundColor : '#7BB062',
+            },
+            headerTintColor : '#fff',
+        }
+    },
+    Updateser :{
+        screen : Updateser ,
+        navigationOptions:{
+            title : 'Update Servey',
+            headerStyle : {
+                backgroundColor : '#7BB062',
+            },
+            headerTintColor : '#fff',
+        }
+    },
     
 
   });
@@ -252,7 +298,28 @@ const AuthStackAdmin = createStackNavigator({
                 },
                 headerTintColor : '#fff',
             }
-        }
+        },
+        EditUserName : {
+            screen : EditUserName,
+            navigationOptions : {
+                title: 'ChangeUserName',
+                headerStyle: {
+                backgroundColor: '#7BB062',
+                },
+                headerTintColor: '#fff',
+            }
+        },
+        Work1 : {
+            screen : Work1,
+            navigationOptions:{
+                title : 'Workers',
+                headerStyle : {
+                    backgroundColor : '#7BB062',
+                },
+                headerTintColor : '#fff',
+            }
+        },
+    
         
     
   });
@@ -320,7 +387,17 @@ const AppNavigator = createStackNavigator({
             },
             headerTintColor : '#fff',
         }
-    }
+    }, 
+    Work1 : {
+        screen : Work1,
+        navigationOptions:{
+            title : 'Workers',
+            headerStyle : {
+                backgroundColor : '#7BB062',
+            },
+            headerTintColor : '#fff',
+        }
+    },
 
 },
   {

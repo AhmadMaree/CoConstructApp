@@ -32,11 +32,17 @@ class Profile extends Component {
           allData : [],
           length : 0 ,
           avatarSource1 : null,
+          username :'',
+          isFocused: false
         }
       }
 
       
-      componentDidMount() {
+     async componentDidMount() {
+      this.subs = [
+        this.props.navigation.addListener("didFocus", () => this.setState({ isFocused: true })),
+        this.props.navigation.addListener("willBlur", () => this.setState({ isFocused: false }))
+      ];
         const {EW} = this.props.navigation.state.params;
         this.state.emailEw= EW;
         let url = 'http://'+Ip.ip+':8088/get_all_Profile/'+this.state.emailEw ;
@@ -44,6 +50,9 @@ class Profile extends Component {
         .then(results=>this.setState({'allData':results.response}));
        
        }
+       componentWillUnmount() {
+        this.subs.forEach(sub => sub.remove());
+      }
       
       selectPhotoTapped(num){
         const options = {
@@ -104,11 +113,15 @@ class Profile extends Component {
     };
   
     render(){
+      if (!this.state.isFocused) {
+        this.componentDidMount()
+      }
       const {EW} = this.props.navigation.state.params;
       this.state.emailEw= EW;
 
       this.state.allData.forEach((item)=>{
           this.state.avatarSource = encodeURI('http://'+Ip.ip+':8088/load_image1?img=' + `${item.photo}`)
+          this.state.username = `${item.username}`
       });
     
         return(
@@ -126,35 +139,48 @@ class Profile extends Component {
                   : <Image  style={Styles.ProfileTopic} source={{uri:this.state.avatarSource}}/>}
                 </View>
                 <Icon onPress={this.selectPhotoTapped.bind(this,1)} size={30} name="camera" style={{color:'#1c313a',marginTop:-60,marginLeft:110 }}/>
-                <Text style={Styles.email}>{EW}</Text>
-                <Text>{this.props.avatarSource}</Text>
+               
             </View>
-            
+            <View style={{justifyContent:'flex-start',alignItems:'flex-start', flex : 1 ,padding :20 ,
+            backgroundColor : 'rgba(0,0,0,0.5)' , height : 700}}>
+                <Text style={{marginTop :20 , fontSize : 30, 
+                              color : '#fff',
+                              fontFamily :'Bellota-Bold'}}>Email</Text>
+                <Text  style={{ fontSize : 15, 
+                                marginLeft:30,
+                               color : '#fff',
+                              fontFamily :'Bellota-Bold'}}>{EW}</Text>
+                <Text  style={{ fontSize : 20, 
+                              color : '#fff',
+                              fontFamily :'Bellota-Bold'}}>UserName</Text>
+                <Text  style={{ fontSize : 15, 
+                                marginLeft:30,
+                              color : '#fff',
+                              fontFamily :'Bellota-Bold'}}>{this.state.username}</Text>
+                
+                </View>
             </ImageBackground>
-            <View style={Styles.Bar}>
-
-            </View>
+            
             <ScrollView style={Styles.hBk}>
             <Form>
-             <Item stackedLabel>
-                
-                <Label>UserName</Label>
-                <Input underlineColorAndroid />
-                        
-             </Item>
-             <Item stackedLabel>
               
+             
+             <Item stackedLabel>
               <TouchableOpacity style={Styles.row} onPress={() => this.props.navigation.navigate('Changepassword',{email1:EW})}>
                 <Text style={[Styles.title]}>EditPassword</Text>
                 <View style={Styles.co}>
                 <Icon1 name={'keyboard-arrow-right'} size={30} color={Colors.DARKGRAY}/>
                 </View>
                </TouchableOpacity>
-               
-             </Item>
-             <TouchableOpacity style={Styles.buttonlogin}>
-                 <Text style={Styles.buttnTextlogin}>Save</Text>
-             </TouchableOpacity> 
+               </Item>
+               <Item stackedLabel>
+              <TouchableOpacity style={Styles.row1} onPress={() => this.props.navigation.navigate('EditUserName',{email1:EW,user:this.state.username})}>
+                <Text style={[Styles.title]}>EditUserName</Text>
+                <View style={Styles.co}>
+                <Icon1 name={'keyboard-arrow-right'} size={30} color={Colors.DARKGRAY}/>
+                </View>
+               </TouchableOpacity>
+               </Item>
             </Form>
             </ScrollView>
            
@@ -174,7 +200,8 @@ const Styles = StyleSheet.create({
      hBk: {
         flex : 1 , 
         width : null , 
-        alignSelf : 'stretch'
+
+        
         
       },
       hed : {
@@ -182,7 +209,8 @@ const Styles = StyleSheet.create({
             alignItems :  'center',
             justifyContent: 'center' ,
             padding :20 ,
-            backgroundColor : 'rgba(0,0,0,0.5)'
+            backgroundColor : 'rgba(0,0,0,0.5)',
+            height: 600
 
       },
       ProfileWarp : {
@@ -204,12 +232,11 @@ const Styles = StyleSheet.create({
 
       },
       email :  {
-            marginTop :20 , 
+            marginTop :30 , 
             fontSize : 16 , 
             color : '#fff',
             fontWeight  :'bold',
-            marginTop:30
-           
+            fontFamily :"Courgette-Regular"
       },
       Bar : {
         borderTopColor : '#d9d9d9',
@@ -240,6 +267,7 @@ const Styles = StyleSheet.create({
       fontWeight:'bold',
       color: Colors.DARKGRAY,
   },
+  
   row:{
     flexDirection: 'row',
     justifyContent:'space-between',
@@ -249,8 +277,20 @@ const Styles = StyleSheet.create({
     paddingLeft:25,
     paddingRight:25,
     alignItems:'center',
-    backgroundColor: Colors.CGRAY,
-
+    backgroundColor: Colors.COCOLOR,
+    marginTop : 50 ,
+}, 
+row1:{
+  flexDirection: 'row',
+  justifyContent:'space-between',
+  height:70,
+  width : "90%",
+  borderRadius : 60 ,
+  paddingLeft:25,
+  paddingRight:25,
+  alignItems:'center',
+  backgroundColor: Colors.CGRAY,
+  marginTop : 50 ,
 }, 
 
 co: {

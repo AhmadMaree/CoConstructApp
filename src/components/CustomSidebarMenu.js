@@ -108,9 +108,9 @@ import Ip from '../screen/Ip';
 
                      if(item.screenToNavigate === 'Login'){
                           AsyncStorage.clear();
-                          console.log("ahmad");
+                         
                      }
-                    console.log("asdadas")
+                   
                     this.props.navigation.navigate(item.screenToNavigate,{EW:this.state.email});
 
                   }}>

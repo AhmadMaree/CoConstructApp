@@ -45,6 +45,8 @@ export default class ListRow extends Component {
                 TE = {item.TE}
                 photo= {item.photo}
                 nav= {this.props.navigation}
+                suma= {item.sumra}
+                co ={item.countra}
                 
             />
 
