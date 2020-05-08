@@ -19,6 +19,8 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {Container,Header,Body,Checkbox,Title,Card,CardItem,Left,Right,Content,Grid,Col, Thumbnail, Subtitle}from 'native-base'
 import Ip from './Ip';
+import Icon3 from 'react-native-vector-icons/Ionicons';
+import Icon1 from 'react-native-vector-icons/SimpleLineIcons';
 
 export default class Show extends Component {
 
@@ -47,51 +49,7 @@ export default class Show extends Component {
 
   }
 
-  toggle = idd => {
-    
-    
-    let url2 = 'http://'+Ip.ip+':8088/insertaccess/'+this.state.flag1+'/'+idd;
-    const data = new FormData();
-    data.append("flag",this.state.flag1);
-    data.append("ide",this.state.ide);
-
-     fetch(url2, { method: 'post', body:data})
-     .then(response => response.json())
-     .then(json => {if(json.status === 200){
-         //AsyncStorage
-         alert('ACCEPT it')   
-      
-     }else if(json.result === "in"){
-
-      }           }) 
-
-
-
-  }
-
-  toggle1 =idd=>{
-    
-   
-    
-    let url2 = 'http://'+Ip.ip+':8088/insertaccess/'+this.state.flag+'/'+idd;
-    const data = new FormData();
-    data.append("flag",this.state.flag);
-    data.append("ide",this.state.ide);
-
-     fetch(url2, { method: 'post', body:data})
-     .then(response => response.json())
-     .then(json => {if(json.status === 200){
-         //AsyncStorage
-         alert('Reject it')   
-      
-     }else if(json.result === "in"){
-
-      }           }) 
-
-
-
-  }
-
+ 
 
   renderItem = ({ item ,index}) => {
 
@@ -157,7 +115,23 @@ export default class Show extends Component {
     return (
 
       <View style={styles.connt}>
-
+        <Header style={{backgroundColor :"#7BB062" }}>
+                            <Left>
+                                <Icon name='home' style={{fontSize: 20, color: '#efefef'}}/>
+                            </Left>
+                            <Body>
+                            <Title>Officer</Title>
+                            </Body>
+                            <Right>
+                               <Icon3 name='md-notifications' style={{fontSize: 20, color: '#efefef' , marginRight : 30}} />
+                               <Icon1  onPress={this.singout} name='logout' style={{fontSize: 20, color: '#efefef'}}/>
+                               
+                            </Right>
+                </Header>
+               
+                       
+                    <StatusBar backgroundColor='#1c313a' barStyle='light-content'>
+                        </StatusBar>
         <FlatList
           data={this.state.item}
           renderItem={this.renderItem}

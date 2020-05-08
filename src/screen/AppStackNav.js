@@ -398,6 +398,13 @@ const AppNavigator = createStackNavigator({
             headerTintColor : '#fff',
         }
     },
+    Officerpage :{
+        screen : Officerpage ,
+        navigationOptions: {
+            header: null
+        },
+       
+    },
 
 },
   {

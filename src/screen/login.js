@@ -61,7 +61,7 @@ export default class Login extends Component {
           
           if(data != null){
             let d = data.toString();
-            this.props.navigation.navigate('Officerpage');
+            this.props.navigation.navigate('Officerpage',{Email: this.state.email});
           }
           console.log(data);
         } catch (error) {
@@ -157,7 +157,7 @@ export default class Login extends Component {
                     ToastAndroid.show('Email Or Password incorrect ', ToastAndroid.SHORT)
                 } 
                 else if(json.result === "in"){
-                   this.props.navigation.navigate('Officerpage');
+                   this.props.navigation.navigate('Officerpage',{Email: this.state.email});
                    this.storeToken(this.state.email);
                   }           
                               }

@@ -126,7 +126,6 @@ export default class Row extends Component {
           flexDirection: 'column',
         }}
       >
-
         <View style={{ flex: 1 }} >
 
           <View
@@ -166,7 +165,7 @@ export default class Row extends Component {
               >
                 <View>
                 
-              <TouchableOpacity style={style1.buttonlogin}  onPress={()=> this.props.nav1.navigate('Booking')} >
+              <TouchableOpacity style={style1.buttonlogin}  onPress={()=> this.props.nav1.navigate('Booking',{EM1:this.props.EM})} >
                           <Text style={style1.buttnTextlogin}>Booking</Text>
               </TouchableOpacity>
               <TouchableHighlight onPress={this.Send_SMS.bind(this)} style={style1.buttonlogin1} >

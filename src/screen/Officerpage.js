@@ -3,6 +3,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import Icon1 from 'react-native-vector-icons/SimpleLineIcons';
 import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons';
 import Icon3 from 'react-native-vector-icons/Ionicons';
+import Icon4 from 'react-native-vector-icons/AntDesign';
 import AsyncStorage from '@react-native-community/async-storage';
 import { Table, Row, Rows } from 'react-native-table-component';
 import {
@@ -24,11 +25,14 @@ import Svg, {
     Line
   } from 'react-native-svg';
   import {Container,Header,Body,Title,Card,CardItem,Left,Right,Content,Grid, Thumbnail, Subtitle}from 'native-base'
-import { ScrollView } from 'react-native-gesture-handler';
-import Ip from './Ip';
-
-const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : 0;
-export default class Officerpage extends Component {
+  import { ScrollView } from 'react-native-gesture-handler';
+  import Ip from './Ip';
+    import {createBottomTabNavigator} from 'react-navigation-tabs';
+    import { createAppContainer} from 'react-navigation'
+  
+    import ShowBooking1 from './ShowBooking'
+ const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : 0;
+ class Officerpage extends Component {
 
 
     
@@ -43,9 +47,16 @@ export default class Officerpage extends Component {
             iduser :'',
             item :[],
             email1 :'',
-            buttons :[],
-            buttons1 :[],
+            len:0,
+            nam:'',
+            ide:'',
+            mob:'',
+            addr:'',
+            ch:'',
             tableData :[],
+            tableHead :[],
+            buttons :[],
+            emailoff:'',
         }
         //const {navigate} = this.props.navigation
      }
@@ -59,54 +70,79 @@ export default class Officerpage extends Component {
 
      componentDidMount() {
         BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
-       
+        this.getToken2();
         fetch('http://'+Ip.ip+':8088/get_all_Accpet/').then(results=>results.json())
         .then(results=>this.setState({'item':results.response}));
 
         
-       }
-           
-       componentWillUnmount() {
-        BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
-        fetch('http://'+Ip.ip+':8088/get_all_Accpet/').then(results=>results.json())
-        .then(results=>this.setState({'item':results.response}));
-       }
-           
+       }           
        handleBackButton() {
                BackHandler.exitApp();
                return true;
        }
        
-
+       async getToken2() {
+        try {
+          let userData = await AsyncStorage.getItem("user");
+          let data = userData;
+          
+          if(data != null){
+            let d = data.toString();
+            this.state.emailoff =d ;
+            console.log(this.state.emailoff)
+          }
+        } catch (error) {
+          console.log("Something went wrong", error);
+        }
+      }
 
        renderItem=({item}) => {
-         console.log(item.token);
-         console.log(item.name);
-         this.state.buttons=[<Button onPress={()=> this.props.navigation.navigate("SendNotification",
-          {token: item.token,
-          username: item.name,})} title ={'SendMessage for user'} color="#7BB062" />],
-
-         this.state.tableData = [
-         ['name',<Text>{item.name}</Text>],
-           ['Email',<Text>{item.emailuser}</Text>], 
          
-           ]
-        return (
+          this.state.nam=item.name;
+          this.state.ide= item.idd;
+          this.state.mob= item.tel;
+          this.state.addr= item.addd;
+          this.state.ch= item.checked1;
           
-             <View style={formStyles.container}>
+          if(this.state.ch === '1' && item.emailoffice === this.state.emailoff){
+                this.state.ch= "Yes"
+                this.state.buttons=[<Button onPress={()=> this.props.navigation.navigate("SendNotification",
+                {token: item.token,
+                username: item.name,})} title ={'SendMessage for user'} color="#7BB062" />],
+                
+                
+                this.state.tableHead =[<Text style={{marginLeft :100}}> Details {this.state.nam}</Text>],
+                this.state.tableData = [
+                ['name',<Text>{this.state.nam}</Text>],
+                 ['Identity Number',<Text>{this.state.ide}</Text>],
+                 ['Mobile Number',<Text>{this.state.mob}</Text>],
+                 ['Address',<Text>{this.state.addr}</Text>],
+                 ['Have Title Deed',
+                
+                     <Text>{this.state.ch}</Text>,
 
-         
-        <Table style={{marginVertical:10}} borderStyle={{borderWidth: 1, borderColor: '#000'}}>
-          <Rows  style={{height:70}} data={this.state.tableData} textStyle={formStyles.text1}/>
-          <Row style={formStyles.head} textStyle={formStyles.text} data={this.state.buttons}/>
-        </Table>
+                ]
+                 
+                  
+               
+                 ]
+                
+                 const state=this.state
+               
+                 return (
+          
+                  <View style={formStyles.container}>
         
-        
-      </View>
-              
-        );
-                          
-
+                 
+                  <Table style={{marginVertical:80}} borderStyle={{borderWidth: 1, borderColor: '#000'}}>
+                    <Row  data={state.tableHead} style={formStyles.head} textStyle={formStyles.text}/>
+                    <Rows   data={state.tableData} textStyle={formStyles.text1}/>
+                    <Row style={formStyles.head} textStyle={formStyles.text} data={state.buttons}/>
+                  </Table>
+                </View>
+                      
+                );
+          }
     }
 
 
@@ -134,21 +170,13 @@ export default class Officerpage extends Component {
                     <StatusBar backgroundColor='#1c313a' barStyle='light-content'>
                         </StatusBar>
 
-                        <TouchableOpacity  onPress={()=> this.props.navigation.navigate('ShowBooking')} style={formStyles.button}>
-                            <Text style={formStyles.text2}>Show Booking</Text>
-                        </TouchableOpacity>  
-                       
-                        <Svg height="100" width="400">
-                            <Line x1="0" y1="50" x2="400" y2="50" stroke="#7BB062" strokeWidth="1" />
-                            <Text style={{fontFamily : 'Bellota-Regular',marginLeft:149,marginTop:20}}>List of Accepted</Text>
-                        </Svg>
-
                        
                         
                         
                         <FlatList
                                 data={this.state.item}
                                 renderItem={this.renderItem}
+                                keyExtractor ={item => item.idd}
                                 />
 
                                 
@@ -196,8 +224,139 @@ const formStyles = StyleSheet.create({
     container: { //flex: 1, 
       padding: 16,//height:60 ,
       backgroundColor:'#D9D9DD'},
-      head: { height: 39 },
-      text: { marginLeft:100 },
-      text1 :{marginLeft:5}
+  head: { height: 39 },
+  text: { marginLeft:100 },
+  text1:{marginLeft:5},
+  checkboxx:{
+        
+    backgroundColor: '#B4B6A4',
+    borderRadius: 60,
+    borderWidth: .1,
+    color: '#000',
+    margin: 10,
+   
+    
+       
+   },
+   forcheckbox :{
+       
+       justifyContent: 'flex-start',
+       //flex: 1,
+       flexDirection :'row'
+   },
+   textsignup1 : {
+    color : '#7BB062',
+    fontSize :16 ,
+    fontWeight :'500',
+    marginLeft:-10,
+    marginTop:8
+
+},
+
+buttonlogin : {
+  width : 300,
+  backgroundColor : '#7BB062',
+  borderRadius : 25 , 
+  marginVertical : -40,
+  paddingVertical : 16,
+  marginLeft:35
+} ,
+buttnTextlogin : {
+  fontSize :16 ,
+  fontWeight : '500',
+  color : '#ffffff' , 
+  textAlign : 'center'
+
+
+},
+connt: {
+  backgroundColor: '#d9d9d9',
+  flex: 1,
+  
+ 
+
+},
+hed1 : {
+  //flex : 1 , 
+  alignItems :  'center',
+  justifyContent: 'center' ,
+  padding :-5 ,
+ // backgroundColor : 'rgba(0,0,0,0.5)',
+ // height:150
+
+},
+ProfileWarp1 : {
+width : 40 , 
+height :40 , 
+borderRadius : 0 , 
+borderColor : 'rgba(255,255,255,255)' , 
+borderWidth : 16 , 
+marginLeft:-50
+
+},
+ProfileTopic : {
+  //flex :1 , 
+  width : null , 
+  //alignSelf : 'stretch' , 
+  borderRadius : 0 , 
+  borderColor : '#fff',
+  borderWidth : 2 , 
+  //alignContent:'space-between'
+  width : 40 , 
+  height :40 , 
+  marginLeft:-16,
+  marginTop:-16
+  
+  
+  },
+      
 
 })
+
+
+const AppNavigator1 =createBottomTabNavigator ({
+
+  
+  Officerpage:{
+   screen:Officerpage,
+   navigationOptions:{
+      tabBarLabel:'Booking',
+      
+      tabBarIcon:({tintColor})=>(
+          <Icon4 name="wechat"
+          color={tintColor}
+          size={24}/>
+      )
+  }
+  },
+  ShowBooking1:{
+   screen:ShowBooking1,
+   navigationOptions:{
+      tabBarLabel:'Charts',
+      tabBarIcon:({tintColor})=>(
+          <Icon4 name="barchart"
+          color={tintColor}
+          size={24}/>
+      )
+  }
+ }
+},
+  {
+    lazy: true,
+    tabBarOptions: {
+      style: {
+         backgroundColor: '#7BB062',
+      }
+    },
+    swipeEnabled: true,
+    animationEnabled: true,
+    tabBarPosition: 'bottom',
+    initialRouteName: 'Officerpage',
+    tabBarOptions: {
+      activeTintColor: 'blue',
+      inactiveTintColor: 'grey',
+    },
+  },
+);
+
+export default createAppContainer(AppNavigator1);
