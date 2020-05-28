@@ -92,6 +92,7 @@ import {
 
       componentDidMount(){
         this.getToken1();
+        console.log(this.state.email1)
         this.configureNotifications();
       }
       async getToken1() {
@@ -102,6 +103,7 @@ import {
           if(data != null){
             let d = data.toString();
             this.state.email1=d ;
+            console.log(this.state.email1)
             console.log(this.state.email1)
           }
         } catch (error) {

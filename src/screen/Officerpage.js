@@ -19,6 +19,7 @@ import {
   BackHandler,
   FlatList,
   Button,
+  ToastAndroid,
 } from 'react-native';
 
 import Svg, {
@@ -29,6 +30,7 @@ import Svg, {
   import Ip from './Ip';
     import {createBottomTabNavigator} from 'react-navigation-tabs';
     import { createAppContainer} from 'react-navigation'
+    import { SearchBar } from 'react-native-elements'; 
   
     import ShowBooking1 from './ShowBooking'
  const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : 0;
@@ -57,8 +59,11 @@ import Svg, {
             tableHead :[],
             buttons :[],
             emailoff:'',
+            arrayholder :[],
+            count :0,
         }
         //const {navigate} = this.props.navigation
+       
      }
 
      singout = () => {
@@ -72,7 +77,7 @@ import Svg, {
         BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
         this.getToken2();
         fetch('http://'+Ip.ip+':8088/get_all_Accpet/').then(results=>results.json())
-        .then(results=>this.setState({'item':results.response}));
+        .then(results=>this.setState({'item':results.response,'arrayholder':results.response}));
 
         
        }           
@@ -96,7 +101,7 @@ import Svg, {
         }
       }
 
-       renderItem=({item}) => {
+       renderItem=({item,index}) => {
          
           this.state.nam=item.name;
           this.state.ide= item.idd;
@@ -119,8 +124,17 @@ import Svg, {
                  ['Address',<Text>{this.state.addr}</Text>],
                  ['Have Title Deed',
                 
-                     <Text>{this.state.ch}</Text>,
-
+                 <View>
+                 <Text style={{marginLeft:60}}>{this.state.ch}</Text>
+                 <View style={formStyles.hed}>
+                 <View style={formStyles.ProfileWarp}> 
+                 <Image  style={formStyles.ProfileTopic1} source={{uri:encodeURI('http://'+Ip.ip+':8088/load_image1?img=' + `${item.photo}`)}}/>
+                
+                </View>
+                
+             </View>
+             </View>
+               
                 ]
                  
                   
@@ -134,7 +148,7 @@ import Svg, {
                   <View style={formStyles.container}>
         
                  
-                  <Table style={{marginVertical:80}} borderStyle={{borderWidth: 1, borderColor: '#000'}}>
+                  <Table style={{marginVertical:30}} borderStyle={{borderWidth: 1, borderColor: '#000'}}>
                     <Row  data={state.tableHead} style={formStyles.head} textStyle={formStyles.text}/>
                     <Rows   data={state.tableData} textStyle={formStyles.text1}/>
                     <Row style={formStyles.head} textStyle={formStyles.text} data={state.buttons}/>
@@ -142,9 +156,85 @@ import Svg, {
                 </View>
                       
                 );
+          } else if(this.state.ch === '0' && item.emailoffice === this.state.emailoff){
+                    this.state.count=parseInt(this.state.count)+parseInt(1);
+
+                    var data = JSON.stringify({
+                      "to": item.token,
+                      "content_available": true,
+                      "notification": {
+                          "title": "Hi " + item.name,
+                          "body": "You've Recive massage from office",
+                          "sound": "default",
+                          "icon": "logo"
+                      },
+                      "data": {
+                          "name": "Reject Booking",
+                          "description": "Hello, your Booking Rejected Because you don't have a Title Deed."
+                      }
+                  });
+          
+                  var xhr = new XMLHttpRequest();
+                  xhr.withCredentials = true;
+          
+                  xhr.addEventListener("readystatechange", function () {
+                      if (this.readyState === 4) {
+                          console.log(this.responseText);
+                      }
+                  });
+          
+                  xhr.open("POST", "https://fcm.googleapis.com/fcm/send");
+                  xhr.setRequestHeader("content-type", "application/json");
+                  xhr.setRequestHeader("authorization", "key=AIzaSyDZHylej3wjHt1y8L_3InntLUptJWMPZI8");
+                  xhr.setRequestHeader("cache-control", "no-cache");
+                  xhr.setRequestHeader("postman-token", "b6fe8a19-d390-5e0a-b701-e9d1a2eb3ad1");
+          
+                  xhr.send(data);
+                  ToastAndroid.show("Response Sent!", ToastAndroid.SHORT)
+                  ToastAndroid.show("Massge Reject send for"+this.state.count+"Users.", ToastAndroid.LONG)
+
           }
     }
 
+
+    searchFilterFunction = text => {    
+      this.setState({
+        value: text,
+      });
+      const newData = this.state.arrayholder.filter(item => {      
+        const itemData = `${item.addd}`;
+      
+         const textData = text;
+          
+         return itemData.indexOf(textData) > -1;    
+      });
+      
+      this.state.item = newData ;
+    };
+    renderHeader = () => {    
+      return (      
+        <SearchBar        
+          placeholder="Type Here..."        
+          lightTheme        
+          round        
+          onChangeText={text => this.searchFilterFunction(text)}
+          autoCorrect={false}      
+          value={this.state.value}       
+        />    
+      );  
+    };
+    renderSeparator = () => {
+      return (
+        <View
+          style={{
+            height: 1,
+            width: '86%',
+            backgroundColor: '#CED0CE',
+            marginLeft: '14%',
+          }}
+        />
+      );
+    }; 
 
 
 
@@ -157,10 +247,10 @@ import Svg, {
                                 <Icon name='home' style={{fontSize: 20, color: '#efefef'}}/>
                             </Left>
                             <Body>
-                            <Title>Officer</Title>
+                            <Title>List of Booking</Title>
                             </Body>
                             <Right>
-                               <Icon3 name='md-notifications' style={{fontSize: 20, color: '#efefef' , marginRight : 30}} />
+                            
                                <Icon1  onPress={this.singout} name='logout' style={{fontSize: 20, color: '#efefef'}}/>
                                
                             </Right>
@@ -177,6 +267,8 @@ import Svg, {
                                 data={this.state.item}
                                 renderItem={this.renderItem}
                                 keyExtractor ={item => item.idd}
+                                ListHeaderComponent={this.renderHeader} 
+                                ItemSeparatorComponent={this.renderSeparator}
                                 />
 
                                 
@@ -309,7 +401,50 @@ ProfileTopic : {
   
   
   },
-      
+  hed : {
+    //flex : 1 , 
+    alignItems :  'center',
+    justifyContent: 'center' ,
+    padding :-5 ,
+   // backgroundColor : 'rgba(0,0,0,0.5)',
+   // height:150
+   marginLeft:20
+  
+  },
+  ProfileWarp : {
+  width : 120 , 
+  height :120 , 
+  borderRadius : 0 , 
+  borderColor : 'rgba(255,255,255,255)' , 
+  borderWidth : 16 , 
+  marginLeft:-50
+  
+  },
+  ProfileTopic1 : {
+  //flex :1 , 
+  width : null , 
+  //alignSelf : 'stretch' , 
+  borderRadius : 0 , 
+  borderColor : '#fff',
+  borderWidth : 2 , 
+  //alignContent:'space-between'
+  width : 120 , 
+  height :120 , 
+  marginLeft:-16,
+  marginTop:-16
+  
+  
+  },
+  email :  {
+    marginTop :20 , 
+    fontSize : 16 , 
+    color : '#000',
+   // fontWeight  :'bold',
+    marginTop:30,
+    fontFamily:'Bellota-LightItalic',
+    marginLeft:-40
+   
+  },     
 
 })
 

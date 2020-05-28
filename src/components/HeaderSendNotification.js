@@ -88,6 +88,7 @@ export default class HeaderSendNotification extends Component {
         this.setState({ notSentYet: false })
     }
 
+    
     render() {
         console.log(this.state.sender_token)
         return (

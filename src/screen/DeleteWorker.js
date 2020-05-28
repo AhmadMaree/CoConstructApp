@@ -39,7 +39,7 @@ export default class DeleteWorker extends Component {
 
   componentDidMount() {
 
-    fetch('http://'+IP.ip+':8088/get_show_Worker/').then(results=>results.json())
+    fetch('http://'+Ip.ip+':8088/get_show_Worker/').then(results=>results.json())
     .then(results=>this.setState({'item':results.response,'len':results.length}));
    
   }
@@ -126,7 +126,7 @@ export default class DeleteWorker extends Component {
            <Left style>
            
              <Thumbnail
-             source={{uri:encodeURI('http://'+IP.ip+':8088/load_image1?img=' + item.photoname)}} style={{width:120,height:70,borderRadius:10,marginRight:5}}/>
+             source={{uri:encodeURI('http://'+Ip.ip+':8088/load_image1?img=' + item.photoname)}} style={{width:120,height:70,borderRadius:10,marginRight:5}}/>
              
              <View style={{alignItems:'flex-start',Top:20}}> 
                <Title style={{color:"#000"}}>

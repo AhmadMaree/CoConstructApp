@@ -36,6 +36,7 @@ import Deletesurvey from './Deletesurvey';
 import Updateser from './Updateser';
 import CatagoryWorker from './CatagoryWorker';
 import Work1 from './Work';
+import Mapss from './Mapsworker'
 const AuthStackAdmin = createStackNavigator({
     Splash: {
         screen: Splash,
@@ -319,6 +320,16 @@ const AuthStackAdmin = createStackNavigator({
                 headerTintColor : '#fff',
             }
         },
+        Mapss : {
+            screen : Mapss,
+            navigationOptions:{
+                title : 'Map',
+                headerStyle : {
+                    backgroundColor : '#7BB062',
+                },
+                headerTintColor : '#fff',
+            }
+        },
     
         
     
@@ -404,6 +415,16 @@ const AppNavigator = createStackNavigator({
             header: null
         },
        
+    },
+    Mapss : {
+        screen : Mapss,
+        navigationOptions:{
+            title : 'Map',
+            headerStyle : {
+                backgroundColor : '#7BB062',
+            },
+            headerTintColor : '#fff',
+        }
     },
 
 },

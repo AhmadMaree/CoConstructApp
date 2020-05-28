@@ -49,6 +49,7 @@ export default class Booking extends Component {
        
       ],
       em :'',
+      item :[],
     
     }
   }
@@ -72,10 +73,16 @@ export default class Booking extends Component {
  componentDidMount(){
   this.getToken1()
   this.getToken2()
+  const {EM1} = this.props.navigation.state.params;
+  this.state.em= EM1;
+
+   fetch('http://'+IP.ip+':8088/get_r1/'+this.state.em).then(results=>results.json())
+    .then(results=>this.setState({'item':results.response,'len':results.length}));
+
  }
 
  onRegister = () => {
-  
+
   if (!(this.state.name=== '' || this.state.addd === '' || this.state.tel === '' || this.state.idd === '')) {
 
   let url2 = 'http://'+IP.ip+':8088/Sendtooffice/'+this.state.emailuser+'/'+this.state.name+'/'+this.state.idd+'/'+this.state.tel+'/'+this.state.addd+'/'+this.state.checked1+'/'+this.state.em;
@@ -121,8 +128,22 @@ export default class Booking extends Component {
                  else if(json.result === "success"){
                     
                 } }) 
-    
+               
+                
+                var sum1;
 
+                sum1=parseInt(this.state.count) + parseInt(1);
+                console.log(sum1)
+   let url3 = 'http://'+IP.ip+':8088/updategrp/'+this.state.em;
+                const data1 = new FormData();
+                 data1.append("count",sum1)
+                 fetch(url3, { method: 'post', body:data1})
+                 .then(response => response.json())
+                 .then(json => {if(json.result === "failed"){   
+                 }
+                 else if(json.result === "success"){
+                    
+                } }) 
   
 }
 selectPhotoTapped(num){
@@ -184,6 +205,8 @@ async getToken2() {
   }
 }
 
+
+
                                                                                   
 
  
@@ -191,6 +214,10 @@ async getToken2() {
     const {EM1} = this.props.navigation.state.params;
     this.state.em= EM1;
     console.log(this.state.em);
+    this.state.item.forEach((item)=>{
+      this.state.count = `${item.may}`
+  });
+      console.log(this.state.count)
     const state = this.state;
     return (
       <View style={styles.container}>

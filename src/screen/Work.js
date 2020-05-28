@@ -17,6 +17,8 @@ import {
 } from "react-native";
 import Icon from 'react-native-vector-icons/Feather';
 import Icon1 from 'react-native-vector-icons/FontAwesome5';
+import Icon2 from 'react-native-vector-icons/AntDesign';
+import Icon3 from 'react-native-vector-icons/MaterialCommunityIcons';
 import { SearchBar } from 'react-native-elements'; 
 import {Container,Header,Body,Checkbox,Title,Card,CardItem,Left,Right,Content,Grid,Col, Thumbnail, Subtitle}from 'native-base'
 import SendSMS from 'react-native-sms'
@@ -156,7 +158,9 @@ import StarRating from 'react-native-star-rating';
                <Icon name="phone-call" size={30} color='#4559C1' /> 
               </TouchableOpacity>
               
+              
            </Left>
+           
                 
             <Right>
             <View style={{alignItems:'flex-start',marginTop:15}}> 
@@ -168,9 +172,14 @@ import StarRating from 'react-native-star-rating';
                <Text style={{fontFamily :'Charm-Regular' , fontSize : 20}}>{item.field} </Text>
                <Text>{item.adr}</Text>
                <Text style={{fontFamily :'Bellota-Bold'}}>{item.tel}</Text>
-               <TouchableHighlight style={Styles.buttonlogin2} onPress={() => this.toggelflag(item.name)} >
-                  <Text style={Styles.buttnTextlogin1}>My Work</Text>
+               <View style={{flexDirection :'row'}}>
+               <TouchableOpacity style={Styles.buttonlogin5} onPress={() => this.props.navigation.navigate('Mapss',{Name: item.name})}>
+               <Icon3 name="google-maps" size={35}  color='#7BB062'/>
+              </TouchableOpacity>
+               <TouchableHighlight style={Styles.buttonlogin5} onPress={() => this.toggelflag(item.name)} >
+                  <Icon2 name="downcircle" size={30}  color='#7BB062'/>
               </TouchableHighlight>
+              </View>
              </View>
             
             
@@ -315,6 +324,22 @@ import StarRating from 'react-native-star-rating';
               marginTop:10,
               height:40,
               
+              
+            } ,
+            buttonlogin4 : {
+              paddingHorizontal:30,
+              
+              marginTop:10,
+              height:40,
+              marginLeft:70              
+              
+            } ,
+            buttonlogin5 : {
+              paddingHorizontal:30,
+              
+              marginTop:20,
+              height:40,
+              marginLeft:10              
               
             } ,
             buttonlogin2 : {
