@@ -163,7 +163,8 @@ export default class Login extends Component {
                               }
                               
                               ) 
-        }else{
+        }
+        else{
 
             let url2 = 'http://'+IP.ip+':8088/loginco/'+this.state.iduser+'/'+this.state.email+'/'+this.state.pass;
             const data = new FormData();
@@ -182,7 +183,7 @@ export default class Login extends Component {
                 ToastAndroid.show('Email Or Password incorrect', ToastAndroid.SHORT)
             } 
             else if(json.result === "in"){
-               this.props.navigation.navigate('Drawer',{Email: this.state.email})
+               this.props.navigation.navigate('Drawer',{Email:this.state.email})
                this.storeToken1(this.state.email);
 
               }           

@@ -149,7 +149,7 @@ class Profile extends Component {
                 <Text  style={{ fontSize : 15, 
                                 marginLeft:30,
                                color : '#fff',
-                              fontFamily :'Bellota-Bold'}}>{EW}</Text>
+                              fontFamily :'Bellota-Bold'}}>nafeahammad90@gmail.com</Text>
                 <Text  style={{ fontSize : 20, 
                               color : '#fff',
                               fontFamily :'Bellota-Bold'}}>UserName</Text>

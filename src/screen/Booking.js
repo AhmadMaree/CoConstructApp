@@ -27,9 +27,9 @@ export default class Booking extends Component {
       tableData: [
         ['Name',<TextInput  underlineColorAndroid='rgba(0,0,0,0)'  placeholder="Your name " 
          onChangeText={ TextInputValue => this.setState({ name : TextInputValue }) }/> ],
-        ['Identity Number',<TextInput underlineColorAndroid='rgba(0,0,0,0)'  placeholder="EX:0431258974 " 
+        ['Identity Number',<TextInput underlineColorAndroid='rgba(0,0,0,0)'  placeholder="EX:0431258974 "  keyboardType = 'numeric'
          onChangeText={ TextInputValue => this.setState({ idd : TextInputValue }) }/>],
-        ['Mobile Number',<TextInput underlineColorAndroid='rgba(0,0,0,0)'  placeholder="EX:0597438914 " 
+        ['Mobile Number',<TextInput underlineColorAndroid='rgba(0,0,0,0)'  placeholder="EX:0597438914 "  keyboardType = 'numeric'
          onChangeText={ TextInputValue => this.setState({ tel : TextInputValue }) }/>] ,
         ['Address',   <RNPickerSelect
         useNativeAndroidPickerStyle={false}

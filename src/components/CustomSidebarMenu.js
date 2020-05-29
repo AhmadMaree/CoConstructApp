@@ -55,6 +55,7 @@ import Ip from '../screen/Ip';
     componentDidMount(){
       const { Email } = this.props.navigation.state.params;
       this.state.email = Email;
+      console.log(this.state.email)
         let url = 'http://'+Ip.ip+':8088/get_all_Profile/'+this.state.email ;
         fetch(url).then(results=>results.json())
         .then(results=>this.setState({'allData':results.response}));
