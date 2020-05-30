@@ -17,7 +17,7 @@ $ cd CoConstructApp
 # install the dependencies with npm
 $ npm install
 
-# start IOS emulator with running App
+# start Android emulator with running App
 $ react-native run-android
 ```
 # Table of Contents
