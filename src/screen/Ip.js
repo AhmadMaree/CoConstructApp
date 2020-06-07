@@ -1,3 +1,3 @@
 export default {
-    ip: '192.168.1.109'
+    ip: 'Your Ip to connect Server'
 }

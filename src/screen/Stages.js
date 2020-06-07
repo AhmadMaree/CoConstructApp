@@ -191,7 +191,7 @@ import {
             }
           }.bind(this),
           // Android only
-          senderID: "834119776251",
+          senderID: "Put Your ID",
           // iOS only
          /* permissions: {
             alert: true,

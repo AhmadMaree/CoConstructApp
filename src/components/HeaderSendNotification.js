@@ -79,7 +79,7 @@ export default class HeaderSendNotification extends Component {
 
         xhr.open("POST", "https://fcm.googleapis.com/fcm/send");
         xhr.setRequestHeader("content-type", "application/json");
-        xhr.setRequestHeader("authorization", "key=AIzaSyDZHylej3wjHt1y8L_3InntLUptJWMPZI8");
+        xhr.setRequestHeader("authorization", "key=Your Key");
         xhr.setRequestHeader("cache-control", "no-cache");
         xhr.setRequestHeader("postman-token", "b6fe8a19-d390-5e0a-b701-e9d1a2eb3ad1");
 
